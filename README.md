@@ -38,7 +38,7 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi secara lokal:
 
 1. **Clone repositori ini (atau *copy* source code)**:
    ```bash
-   git clone <url-repository> profile-rsup
+   git clone https://github.com/whtrianto/profile-rsup.git
    cd profile-rsup
    ```
 
