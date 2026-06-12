@@ -13,7 +13,7 @@ class TindakanController extends Controller
     public function index()
     {
         try {
-            $list_tindakan = DB::connection('estes')->table('tindakan')
+            $list_tindakan = DB::table('tindakan')
                 ->join('tindakan_jenis', 'tindakan.tindakan_jenis_id', '=', 'tindakan_jenis.id')
                 ->select(
                     'tindakan.id',
@@ -28,7 +28,7 @@ class TindakanController extends Controller
             $connectionError = null;
         } catch (\Exception $e) {
             $list_tindakan = collect();
-            $connectionError = "Gagal memuat data tindakan dari database (estes_care). Silakan periksa koneksi jaringan server database.";
+            $connectionError = "Gagal memuat data tindakan dari database. Silakan periksa koneksi jaringan server database.";
             if (config('app.debug')) {
                 $connectionError .= " [Detail Error: " . $e->getMessage() . "]";
             }
@@ -43,7 +43,7 @@ class TindakanController extends Controller
     public function getDetail($id)
     {
         try {
-            $details = DB::connection('estes')->table('tindakan_detail')
+            $details = DB::table('tindakan_detail')
                 ->join('kelas', 'tindakan_detail.kelas_id', '=', 'kelas.id')
                 ->select(
                     'kelas.nama AS nama_kelas',

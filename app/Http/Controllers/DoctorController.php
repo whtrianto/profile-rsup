@@ -12,7 +12,7 @@ class DoctorController extends Controller
 
     private function getEstesDoctors()
     {
-        $jadwal_dokter = \Illuminate\Support\Facades\DB::connection('estes')->select("SELECT
+        $jadwal_dokter = \Illuminate\Support\Facades\DB::select("SELECT
                     pegawai.id AS pegawai_id,
                     pegawai.nama AS nama_dokter,
                     pegawai.foto,
