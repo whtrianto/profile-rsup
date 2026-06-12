@@ -146,7 +146,8 @@ class DoctorController extends Controller
             $file = $request->file('image');
             $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_\.-]/', '_', $file->getClientOriginalName());
             
-            $dir = storage_path('app/public/doctors');
+            // Simpan LANGSUNG ke folder public/storage/doctors agar tidak perlu symlink
+            $dir = public_path('storage/doctors');
             if (!file_exists($dir)) {
                 mkdir($dir, 0755, true);
             }
@@ -163,7 +164,7 @@ class DoctorController extends Controller
                 imagepng($img, $destPath, 6); // compress level 6
                 imagedestroy($img);
             } else {
-                $file->storeAs('doctors', $filename, 'public');
+                $file->move($dir, $filename);
             }
             
             $doctor->image = 'doctors/' . $filename;
