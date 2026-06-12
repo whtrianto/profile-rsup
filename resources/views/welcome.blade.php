@@ -2303,10 +2303,16 @@
                     </svg>
                     <span>Partner Kesehatan Pekerja & Keluarga Anda</span>
                 </div>
-                <h1>Rumah Sakit Umum <br><span>Pekerja</span>, Melayani Sepenuh Hati</h1>
-                <p>Rumah Sakit Umum Pekerja berkomitmen memberikan pelayanan kesehatan berkualitas
-                    prima untuk para pekerja dan masyarakat umum dengan fasilitas modern dan tim medis berpengalaman.
-                </p>
+                <div style="font-size:0.6rem">
+                    <h1 style="font-size: 1.8rem; line-height: 1.2;">Rumah Sakit <span>Umum Pekerja,</span><br>Melayani
+                        Sepenuh Hati</h1>
+                    <p style="font-size: 0.75rem; margin-top: 10px;">Rumah Sakit Umum Pekerja berkomitmen memberikan
+                        pelayanan kesehatan berkualitas
+                        prima untuk para pekerja dan masyarakat umum dengan fasilitas modern dan tim medis
+                        berpengalaman.
+                    </p>
+
+                </div>
                 <div class="hero-actions">
                     <a href="#jadwal" class="btn-primary-hero">
                         <span>Cari Jadwal Dokter</span>
