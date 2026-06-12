@@ -9,6 +9,15 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
+Route::get('/linkstorage', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Storage Link Berhasil Dibuat! Silakan cek kembali gambar dokternya.';
+    } catch (\Exception $e) {
+        return 'Gagal: ' . $e->getMessage();
+    }
+});
+
 Route::get('/', function () {
     // Fetch doctor schedules from estes_care database
     $tanggal = date('Y-m-d');
