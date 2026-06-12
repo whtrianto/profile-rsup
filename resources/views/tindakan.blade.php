@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cari dan lihat estimasi biaya tindakan medis di Rumah Sakit Umum Pekerja (RSUP) KBN. Informasi transparan dan lengkap untuk kebutuhan perawatan Anda.">
-    <meta name="keywords" content="Biaya Tindakan Medis, Tarif Rumah Sakit, RSUP KBN, Harga Operasi, Biaya Rawat Inap, Layanan Kesehatan Jakarta">
+    <meta name="description"
+        content="Cari dan lihat estimasi biaya tindakan medis di Rumah Sakit Umum Pekerja (RSUP) KBN. Informasi transparan dan lengkap untuk kebutuhan perawatan Anda.">
+    <meta name="keywords"
+        content="Biaya Tindakan Medis, Tarif Rumah Sakit, RSUP KBN, Harga Operasi, Biaya Rawat Inap, Layanan Kesehatan Jakarta">
     <meta name="robots" content="index, follow">
     <title>Estimasi Biaya Tindakan Medis - RSU Pekerja KBN</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -1673,10 +1675,12 @@
     <!-- Navbar -->
     <nav>
         <a href="{{ url('/') }}" class="logo-container">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img"
-                style="height: 48px; width: auto; border-radius: 8px; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <img src="{{ asset('images/danantara.png') }}" alt="Logo Danantara" class="logo-img"
+                style="height: 40px; width: auto; margin-right: 8px;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
+                style="height: 60px; width: auto; ">
             <div class="logo-text-wrapper">
-                <span class="logo-title">RSU PEKERJA</span>
+                <span class="logo-title">RUMAH SAKIT UMUM PEKERJA</span>
                 <span class="logo-subtitle">KBN - RSUP</span>
             </div>
         </a>
@@ -2100,7 +2104,7 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <a href="{{ url('/') }}" class="logo-container" style="margin-bottom: 1.5rem; display: inline-flex;">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img"
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
                         style="height: 48px; width: auto; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1);">
                     <div class="logo-text-wrapper" style="text-align: left;">
                         <span class="logo-title" style="color: white;">RSU PEKERJA</span>

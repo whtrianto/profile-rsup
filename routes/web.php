@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -138,7 +139,8 @@ Route::get('/', function () {
     $promos = App\Models\Promo::all();
     $news = App\Models\News::all();
     $slides = App\Models\Slide::where('is_active', true)->orderBy('order', 'asc')->get();
-    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini'));
+    $facilities = \App\Models\Facility::all();
+    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini', 'facilities'));
 });
 
 Route::get('/berita/{id}', function ($id) {
@@ -184,6 +186,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('promos', PromoController::class);
     Route::resource('news', NewsController::class);
     Route::resource('slides', SlideController::class);
+    Route::resource('facilities', FacilityController::class);
 
     // Admin Only Routes
     Route::middleware('admin')->group(function () {

@@ -8,7 +8,7 @@
     <meta name="keywords" content="Berita Kesehatan, Info RSUP KBN, Artikel Medis, Rumah Sakit Umum Pekerja">
     <meta name="robots" content="index, follow">
     <title>{{ $item->title }} - RSU Pekerja KBN</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -424,7 +424,7 @@
         }
 
         .chatbot-avatar-active {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             width: 40px;
             height: 40px;
@@ -432,7 +432,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1.5px solid rgba(255,255,255,0.3);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
         }
 
         .chatbot-avatar-active svg {
@@ -504,7 +504,7 @@
             color: var(--text-dark);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
             border: 1.5px solid #f1f5f9;
         }
 
@@ -518,9 +518,20 @@
         }
 
         @keyframes pulseActive {
-            0% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.5; }
+            0% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
         }
 
         .chat-message.user {
@@ -621,6 +632,7 @@
                 height: 420px;
                 bottom: 70px;
             }
+
             .chatbot-widget {
                 bottom: 20px;
                 right: 20px;
@@ -637,11 +649,13 @@
     <!-- Navbar -->
     <nav>
         <a href="{{ url('/') }}" class="logo-container">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img"
-                style="height: 40px; width: auto; border-radius: 6px; border: 1.5px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <img src="{{ asset('images/danantara.png') }}" alt="Logo Danantara" class="logo-img"
+                style="height: 40px; width: auto; margin-right: 8px;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
+                style="height: 60px; width: auto; ">
             <div class="logo-text-wrapper">
-                <span class="logo-title">RSU PEKERJA</span><br>
-                <span class="logo-subtitle">KBN</span>
+                <span class="logo-title">RUMAH SAKIT UMUM PEKERJA</span><br>
+                <span class="logo-subtitle">KBN - RSUP</span>
             </div>
         </a>
 
@@ -705,17 +719,17 @@
                 <h3 class="widget-title">Artikel Terbaru</h3>
                 <div class="recent-list">
                     @forelse($otherNews as $recent)
-                    <a href="{{ route('news.show', $recent->id) }}" class="recent-item">
-                        <img src="{{ $recent->image ? (str_starts_with($recent->image, 'http') ? $recent->image : asset($recent->image)) : 'https://images.unsplash.com/photo-1504813184591-015578c7720c?auto=format&fit=crop&w=200&q=80' }}"
-                            alt="{{ $recent->title }}" class="recent-img">
-                        <div class="recent-info">
-                            <h4>{{ $recent->title }}</h4>
-                            <span
-                                class="recent-date">{{ \Carbon\Carbon::parse($recent->published_at)->format('d M Y') }}</span>
-                        </div>
-                    </a>
+                        <a href="{{ route('news.show', $recent->id) }}" class="recent-item">
+                            <img src="{{ $recent->image ? (str_starts_with($recent->image, 'http') ? $recent->image : asset($recent->image)) : 'https://images.unsplash.com/photo-1504813184591-015578c7720c?auto=format&fit=crop&w=200&q=80' }}"
+                                alt="{{ $recent->title }}" class="recent-img">
+                            <div class="recent-info">
+                                <h4>{{ $recent->title }}</h4>
+                                <span
+                                    class="recent-date">{{ \Carbon\Carbon::parse($recent->published_at)->format('d M Y') }}</span>
+                            </div>
+                        </a>
                     @empty
-                    <p style="font-size: 0.88rem; color: var(--text-muted);">Tidak ada artikel lain.</p>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">Tidak ada artikel lain.</p>
                     @endforelse
                 </div>
             </div>
@@ -744,9 +758,9 @@
 
     <!-- Chatbot Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // --- Chatbot Frontend Logic ---
-            window.toggleChatbot = function() {
+            window.toggleChatbot = function () {
                 const windowEl = document.getElementById('chatbot-window');
                 const toggleBtn = document.querySelector('.chatbot-toggle-btn');
                 const chatIcon = toggleBtn.querySelector('.chat-icon');
@@ -772,7 +786,7 @@
                 }
             };
 
-            window.sendChatbotMessage = function() {
+            window.sendChatbotMessage = function () {
                 const inputEl = document.getElementById('chatbot-input');
                 const message = inputEl.value.trim();
                 if (!message) return;
@@ -793,26 +807,26 @@
                     },
                     body: JSON.stringify({ message: message })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    removeLoadingMessage(loadingId);
-                    appendChatMessage(data.reply, 'bot');
-                })
-                .catch(error => {
-                    removeLoadingMessage(loadingId);
-                    appendChatMessage('Maaf, koneksi terganggu. Silakan coba sesaat lagi.', 'bot');
-                });
+                    .then(response => response.json())
+                    .then(data => {
+                        removeLoadingMessage(loadingId);
+                        appendChatMessage(data.reply, 'bot');
+                    })
+                    .catch(error => {
+                        removeLoadingMessage(loadingId);
+                        appendChatMessage('Maaf, koneksi terganggu. Silakan coba sesaat lagi.', 'bot');
+                    });
             };
 
-            window.handleChatEnter = function(event) {
+            window.handleChatEnter = function (event) {
                 if (event.key === 'Enter') {
                     sendChatbotMessage();
                 }
             };
 
-            window.sendQuickReply = function(text) {
+            window.sendQuickReply = function (text) {
                 appendChatMessage(text, 'user');
-                
+
                 // Loading state
                 const loadingId = appendChatMessage('<span class="status-dot"></span> Sedang berpikir...', 'bot loading');
 
@@ -824,26 +838,26 @@
                     },
                     body: JSON.stringify({ message: text })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    removeLoadingMessage(loadingId);
-                    appendChatMessage(data.reply, 'bot');
-                })
-                .catch(error => {
-                    removeLoadingMessage(loadingId);
-                    appendChatMessage('Maaf, terjadi kesalahan.', 'bot');
-                });
+                    .then(response => response.json())
+                    .then(data => {
+                        removeLoadingMessage(loadingId);
+                        appendChatMessage(data.reply, 'bot');
+                    })
+                    .catch(error => {
+                        removeLoadingMessage(loadingId);
+                        appendChatMessage('Maaf, terjadi kesalahan.', 'bot');
+                    });
             };
 
             function appendChatMessage(text, sender) {
                 const msgEl = document.getElementById('chatbot-messages');
                 const msgId = 'msg-' + Date.now() + Math.random().toString(36).substr(2, 9);
-                
+
                 const messageDiv = document.createElement('div');
                 messageDiv.id = msgId;
                 messageDiv.className = `chat-message ${sender}`;
                 messageDiv.innerHTML = text;
-                
+
                 msgEl.appendChild(messageDiv);
                 msgEl.scrollTop = msgEl.scrollHeight;
                 return msgId;
@@ -874,16 +888,22 @@
             <div class="chatbot-header">
                 <div class="chatbot-header-info">
                     <div class="chatbot-avatar-active">
-                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
                     </div>
                     <div>
                         <h4 style="margin: 0; text-align: left;">Pekerja Care</h4>
-                        <span class="chatbot-status" style="display: flex; align-items: center; gap: 4px;"><span class="status-dot" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span> Online</span>
+                        <span class="chatbot-status" style="display: flex; align-items: center; gap: 4px;"><span
+                                class="status-dot"
+                                style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+                            Online</span>
                     </div>
                 </div>
                 <button class="chatbot-header-close" onclick="toggleChatbot()">&times;</button>
             </div>
-            
+
             <div class="chatbot-messages" id="chatbot-messages">
                 <div class="chat-message bot">
                     Halo! Saya Pekerja Care, Asisten Virtual RSU Pekerja. Ada yang bisa saya bantu hari ini?
@@ -899,7 +919,8 @@
             </div>
 
             <div class="chatbot-input-area">
-                <input type="text" id="chatbot-input" placeholder="Tulis pesan Anda..." onkeypress="handleChatEnter(event)">
+                <input type="text" id="chatbot-input" placeholder="Tulis pesan Anda..."
+                    onkeypress="handleChatEnter(event)">
                 <button class="chatbot-send-btn" onclick="sendChatbotMessage()">
                     <svg viewBox="0 0 24 24">
                         <line x1="22" y1="2" x2="11" y2="13"></line>

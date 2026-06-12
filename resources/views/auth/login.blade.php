@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Login Admin - RSUP KBN</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #064e3b;
@@ -295,7 +296,7 @@
 
     <div class="login-container">
         <div class="login-card">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img">
 
             <div class="login-header">
                 <h2>Portal Admin</h2>
@@ -304,14 +305,14 @@
 
             <!-- Error Messages -->
             @if ($errors->any())
-            <div class="alert-error">
-                <svg viewBox="0 0 24 24" stroke-width="2.5">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-                <span>{{ $errors->first() }}</span>
-            </div>
+                <div class="alert-error">
+                    <svg viewBox="0 0 24 24" stroke-width="2.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <span>{{ $errors->first() }}</span>
+                </div>
             @endif
 
             <form action="{{ url('login') }}" method="POST">
@@ -324,7 +325,8 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username..." value="{{ old('username') }}" required autofocus>
+                        <input type="text" name="username" id="username" class="form-control"
+                            placeholder="Masukkan username..." value="{{ old('username') }}" required autofocus>
                     </div>
                 </div>
 
@@ -335,7 +337,8 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="••••••••"
+                            required>
                     </div>
                 </div>
 
@@ -348,14 +351,16 @@
 
                 <button type="submit" class="btn-submit">
                     <span>Masuk</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </button>
 
                 <a href="{{ url('/') }}" class="btn-back">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
                         <polyline points="12 19 5 12 12 5"></polyline>
                     </svg>

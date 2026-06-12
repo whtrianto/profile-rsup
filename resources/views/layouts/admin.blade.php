@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title') - Admin Panel RSU Pekerja</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #064e3b;
@@ -436,14 +437,16 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img" style="height: 40px; width: auto; border-radius: 6px; background: white; padding: 2px;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
+                style="height: 40px; width: auto; border-radius: 6px; background: white; padding: 2px;">
             <div class="logo-text-wrapper">
                 <span class="logo-title">RSUP Admin</span>
                 <span class="logo-subtitle">KBN - RSUP</span>
             </div>
         </div>
         <div class="sidebar-nav">
-            <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('admin.dashboard') }}"
+                class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <svg viewBox="0 0 24 24">
                     <rect x="3" y="3" width="7" height="9" rx="1"></rect>
                     <rect x="14" y="3" width="7" height="5" rx="1"></rect>
@@ -452,13 +455,15 @@
                 </svg>
                 <span>Dashboard</span>
             </a>
-            <a href="{{ route('admin.doctors.index') }}" class="{{ request()->routeIs('admin.doctors.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.doctors.index') }}"
+                class="{{ request()->routeIs('admin.doctors.*') ? 'active' : '' }}">
                 <svg viewBox="0 0 24 24">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                 </svg>
                 <span>Jadwal Dokter</span>
             </a>
-            <a href="{{ route('admin.promos.index') }}" class="{{ request()->routeIs('admin.promos.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.promos.index') }}"
+                class="{{ request()->routeIs('admin.promos.*') ? 'active' : '' }}">
                 <svg viewBox="0 0 24 24">
                     <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                     <line x1="7" y1="7" x2="7.01" y2="7"></line>
@@ -466,20 +471,55 @@
                 <span>Promo Layanan</span>
             </a>
             <a href="{{ route('admin.news.index') }}" class="{{ request()->routeIs('admin.news.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
                 <span>Berita & Informasi</span>
             </a>
-            <a href="{{ route('admin.slides.index') }}" class="{{ request()->routeIs('admin.slides.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <a href="{{ route('admin.slides.index') }}"
+                class="{{ request()->routeIs('admin.slides.*') ? 'active' : '' }}">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
                 <span>Kelola Carousel</span>
             </a>
-            @if(auth()->check() && auth()->user()->role === 'admin')
-            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                <span>Kelola User</span>
+            <a href="{{ route('admin.facilities.index') }}"
+                class="{{ request()->routeIs('admin.facilities.*') ? 'active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <path d="M8 14h.01"></path>
+                    <path d="M12 14h.01"></path>
+                    <path d="M16 14h.01"></path>
+                    <path d="M8 18h.01"></path>
+                    <path d="M12 18h.01"></path>
+                    <path d="M16 18h.01"></path>
+                </svg>
+                <span>Kelola Layanan</span>
             </a>
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <a href="{{ route('admin.users.index') }}"
+                    class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>Kelola User</span>
+                </a>
             @endif
-            <a href="{{ url('/') }}" target="_blank" style="margin-top: auto; border: 1.5px dashed rgba(255,255,255,0.15); background: rgba(255,255,255,0.02);">
+            <a href="{{ url('/') }}" target="_blank"
+                style="margin-top: auto; border: 1.5px dashed rgba(255,255,255,0.15); background: rgba(255,255,255,0.02);">
                 <svg viewBox="0 0 24 24">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -490,7 +530,8 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="border: 1.5px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); color: #ef4444;">
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                style="border: 1.5px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); color: #ef4444;">
                 <svg viewBox="0 0 24 24" style="stroke: #ef4444;">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                     <polyline points="16 17 21 12 16 7"></polyline>
@@ -523,12 +564,13 @@
         </div>
         <div class="content">
             @if(session('success'))
-            <div class="alert-success">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{{ session('success') }}</span>
-            </div>
+                <div class="alert-success">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ session('success') }}</span>
+                </div>
             @endif
             @yield('content')
         </div>

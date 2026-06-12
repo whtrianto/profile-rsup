@@ -10,7 +10,7 @@
         content="Rumah Sakit Umum Pekerja, RSUP KBN, Rumah Sakit Jakarta, Jadwal Dokter, Layanan Kesehatan, Gawat Darurat, BPJS">
     <meta name="robots" content="index, follow">
     <title>Rumah Sakit Umum Pekerja - RSUP KBN | Pelayanan Kesehatan Terpercaya</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -2232,10 +2232,12 @@
     <!-- Navbar -->
     <nav>
         <a href="{{ url('/') }}" class="logo-container">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo RSUP" class="logo-img"
-                style="height: 48px; width: auto; border-radius: 8px; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <img src="{{ asset('images/danantara.png') }}" alt="Logo Danantara" class="logo-img"
+                style="height: 40px; width: auto; margin-right: 8px;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
+                style="height: 60px; width: auto; ">
             <div class="logo-text-wrapper">
-                <span class="logo-title">RSU PEKERJA</span>
+                <span class="logo-title">RUMAH SAKIT UMUM PEKERJA</span>
                 <span class="logo-subtitle">KBN - RSUP</span>
             </div>
         </a>
@@ -2301,7 +2303,7 @@
                     </svg>
                     <span>Partner Kesehatan Pekerja & Keluarga Anda</span>
                 </div>
-                <h1>Melayani dengan Hati, <br><span>Profesional</span> & Berstandar Tinggi</h1>
+                <h1>Rumah Sakit Umum <br><span>Pekerja</span>, Melayani Sepenuh Hati</h1>
                 <p>Rumah Sakit Umum Pekerja berkomitmen memberikan pelayanan kesehatan berkualitas
                     prima untuk para pekerja dan masyarakat umum dengan fasilitas modern dan tim medis berpengalaman.
                 </p>
@@ -2458,65 +2460,32 @@
                 komprehensif untuk mendiagnosis dan mengobati masalah kesehatan Anda secara tuntas.</p>
         </div>
         <div class="qs-grid">
-            <div class="qs-card" style="background: white;">
-                <div class="qs-icon" style="background-color: var(--secondary-light); color: var(--secondary);">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 12h.01" />
-                        <path d="M15 12h.01" />
-                        <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
-                        <path
-                            d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 5 6.3" />
-                        <path d="M12 2v2" />
-                        <path d="M8 2.3A10.3 10.3 0 0 1 12 2a10.3 10.3 0 0 1 4 .3" />
-                    </svg>
+            @forelse($facilities as $facility)
+                <div class="qs-card" style="background: white;">
+                    <div class="qs-icon"
+                        style="background-color: var(--secondary-light); color: var(--secondary); padding: 8px; display: flex; align-items: center; justify-content: center;">
+                        @if($facility->icon)
+                            <img src="{{ asset('storage/' . $facility->icon) }}" alt="Icon"
+                                style="width: 28px; height: 28px; object-fit: contain;">
+                        @else
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        @endif
+                    </div>
+                    <h3>{{ $facility->title }}</h3>
+                    <p>{{ $facility->description }}</p>
                 </div>
-                <h3>Poli Anak & Tumbuh Kembang</h3>
-                <p>Pemantauan kesehatan fisik dan evaluasi tumbuh kembang balita oleh dokter spesialis anak
-                    berpengalaman.</p>
-            </div>
-            <div class="qs-card" style="background: white;">
-                <div class="qs-icon" style="background-color: var(--secondary-light); color: var(--secondary);">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="8" cy="21" r="1" />
-                        <circle cx="16" cy="21" r="1" />
-                        <path
-                            d="M19 8h-2.5c-.3 0-.5-.2-.6-.4l-1.7-3.5c-.2-.4-.6-.7-1.1-.7H8.5c-.8 0-1.5.7-1.5 1.5v9c0 .8.7 1.5 1.5 1.5H17c.8 0 1.5-.7 1.5-1.5V10c0-1.1-.9-2-2-2Z" />
-                        <path d="M19 14h1.5c.8 0 1.5-.7 1.5-1.5v-1c0-.8-.7-1.5-1.5-1.5H19" />
-                        <path d="M14 3v5" />
-                        <path d="M6 8h11" />
-                    </svg>
+            @empty
+                <div
+                    style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    Belum ada data fasilitas/layanan medis unggulan.
                 </div>
-                <h3>Kebidanan & Kandungan (Obgyn)</h3>
-                <p>Konsultasi kehamilan, pelayanan persalinan yang nyaman, serta pemeriksaan USG 4D akurat.</p>
-            </div>
-            <div class="qs-card" style="background: white;">
-                <div class="qs-icon" style="background-color: var(--secondary-light); color: var(--secondary);">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="5" r="1.5" />
-                        <path d="M12 7v8" />
-                        <path d="M9 21v-6l3-2 3 2v6" />
-                        <path d="M5 10c3 1 5-1 7-1s4 2 7 1" />
-                    </svg>
-                </div>
-                <h3>Fisioterapi & Rehabilitasi</h3>
-                <p>Pemulihan gerak tubuh pasca stroke, cedera otot, maupun rehabilitasi medis pasca operasi.</p>
-            </div>
-            <div class="qs-card" style="background: white;">
-                <div class="qs-icon" style="background-color: var(--secondary-light); color: var(--secondary);">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 2h6" />
-                        <path d="M8 2v5.5a0.5 0 0 1-.15.35L4.2 12.8A1.5 1.5 0 0 0 4 13.8V19a2 2 0 0 0 2 2h6" />
-                        <rect x="12" y="10" width="6" height="12" rx="3" transform="rotate(-30 12 10)" />
-                        <line x1="11" y1="15" x2="19" y2="10.5" />
-                    </svg>
-                </div>
-                <h3>Farmasi & Lab Terpadu</h3>
-                <p>Penyediaan obat-obatan yang lengkap 24 jam dan hasil pemeriksaan darah/urine cepat dan andal.</p>
-            </div>
+            @endforelse
         </div>
     </section>
 
