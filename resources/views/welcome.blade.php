@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rumah Sakit Umum Pekerja (RSUP) KBN menyediakan layanan kesehatan profesional, fasilitas modern, jadwal dokter spesialis lengkap, dan layanan gawat darurat 24 jam.">
-    <meta name="keywords" content="Rumah Sakit Umum Pekerja, RSUP KBN, Rumah Sakit Jakarta, Jadwal Dokter, Layanan Kesehatan, Gawat Darurat, BPJS">
+    <meta name="description"
+        content="Rumah Sakit Umum Pekerja (RSUP) KBN menyediakan layanan kesehatan profesional, fasilitas modern, jadwal dokter spesialis lengkap, dan layanan gawat darurat 24 jam.">
+    <meta name="keywords"
+        content="Rumah Sakit Umum Pekerja, RSUP KBN, Rumah Sakit Jakarta, Jadwal Dokter, Layanan Kesehatan, Gawat Darurat, BPJS">
     <meta name="robots" content="index, follow">
     <title>Rumah Sakit Umum Pekerja - RSUP KBN | Pelayanan Kesehatan Terpercaya</title>
     <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/jpeg">
@@ -2191,6 +2193,8 @@
 
 <body>
 
+    <!-- Developed by www.anstonic.site -->
+
     <!-- Background Glow -->
     <div class="bg-glow"></div>
 
@@ -2596,7 +2600,8 @@
             <p class="section-desc">Temukan dokter spesialis pilihan Anda dan atur kunjungan dengan mudah. Silakan ketik
                 nama dokter atau filter berdasarkan spesialisasi mereka.
                 @if(!empty($nama_hari_ini))
-                    <br><strong style="color: var(--secondary);">Hari ini: {{ $nama_hari_ini }}, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</strong>
+                    <br><strong style="color: var(--secondary);">Hari ini: {{ $nama_hari_ini }},
+                        {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</strong>
                 @endif
             </p>
         </div>
@@ -2621,8 +2626,9 @@
                 </select>
             </div>
         </div>
-        
-        <p style="text-align: center; font-size: 0.85rem; color: var(--danger); margin-top: 10px; margin-bottom: 20px; font-style: italic; font-weight: 500;">
+
+        <p
+            style="text-align: center; font-size: 0.85rem; color: var(--danger); margin-top: 10px; margin-bottom: 20px; font-style: italic; font-weight: 500;">
             *Catatan: Jadwal dokter dapat berubah sewaktu-waktu. Mohon hubungi Customer Service untuk konfirmasi.
         </p>
 
@@ -2652,7 +2658,8 @@
                                     @foreach($doctor->schedules as $sched)
                                         <div class="schedule-row">
                                             <span class="schedule-day">{{ $sched->hari }}</span>
-                                            <span class="schedule-time">{{ $sched->waktu_mulai }} - {{ $sched->waktu_selesai }}</span>
+                                            <span class="schedule-time">{{ $sched->waktu_mulai }} -
+                                                {{ $sched->waktu_selesai }}</span>
                                         </div>
                                     @endforeach
                                 </div>
@@ -2670,7 +2677,8 @@
                             </svg>
                         </div>
                         <h4>Data Dokter Belum Tersedia</h4>
-                        <p>Jadwal dokter spesialis belum dapat dimuat dari sistem. Silakan hubungi call center untuk informasi jadwal.</p>
+                        <p>Jadwal dokter spesialis belum dapat dimuat dari sistem. Silakan hubungi call center untuk
+                            informasi jadwal.</p>
                     </div>
                 @endforelse
             </div>
