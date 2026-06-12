@@ -43,16 +43,25 @@ Route::get('/', function () {
                 ORDER BY
                     pegawai.nama ASC");
 
+        $localDoctors = \App\Models\Doctor::all()->keyBy('id_dokter');
+
         // Group schedules by pegawai_id
         $doctors_grouped = [];
         foreach ($jadwal_dokter as $row) {
             $pid = $row->pegawai_id;
             if (!isset($doctors_grouped[$pid])) {
+                $localDoc = $localDoctors->get($pid);
+                if ($localDoc && $localDoc->image) {
+                    $photoUrl = asset('storage/' . $localDoc->image);
+                } else {
+                    $photoUrl = $row->foto ? 'http://192.168.0.23/storage/' . $row->foto : null;
+                }
+
                 $doctors_grouped[$pid] = (object)[
                     'id' => $pid,
                     'name' => $row->nama_dokter,
                     'specialization' => $row->nama_bagian,
-                    'photo' => $row->foto ? 'http://192.168.0.23/storage/' . $row->foto : null,
+                    'photo' => $photoUrl,
                     'schedules' => [],
                     'schedule_keys' => [],
                     'bagian_list' => [],

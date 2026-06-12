@@ -38,15 +38,25 @@ class DoctorController extends Controller
                 ORDER BY
                     pegawai.nama ASC");
 
+        $localDoctors = \App\Models\Doctor::all()->keyBy('id_dokter');
+
         $doctors_grouped = [];
         foreach ($jadwal_dokter as $row) {
             $pid = $row->pegawai_id;
+
             if (!isset($doctors_grouped[$pid])) {
+                $localDoc = $localDoctors->get($pid);
+                if ($localDoc && $localDoc->image) {
+                    $photoUrl = asset('storage/' . $localDoc->image);
+                } else {
+                    $photoUrl = $row->foto ? 'http://192.168.0.23/storage/' . $row->foto : null;
+                }
+
                 $doctors_grouped[$pid] = (object)[
                     'id' => $pid, // use pegawai_id as id for edit route
                     'name' => $row->nama_dokter,
                     'specialization' => $row->nama_bagian,
-                    'photo' => $row->foto ? 'http://192.168.0.23/storage/' . $row->foto : null,
+                    'photo' => $photoUrl,
                     'schedules' => [],
                     'schedule_keys' => [],
                     'bagian_list' => [],
@@ -126,19 +136,41 @@ class DoctorController extends Controller
     {
         $request->validate([
             'is_visible' => 'required|boolean',
+            'image' => 'nullable|image|max:3072'
         ]);
 
-        if ($request->is_visible) {
-            // Remove from hidden list
-            Doctor::where('id_dokter', $id)->where('status', 'hidden')->delete();
-        } else {
-            // Add to hidden list
-            Doctor::firstOrCreate([
-                'id_dokter' => $id,
-                'status' => 'hidden'
-            ]);
+        $doctor = Doctor::firstOrNew(['id_dokter' => $id]);
+        $doctor->status = $request->is_visible ? 'visible' : 'hidden';
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_\.-]/', '_', $file->getClientOriginalName());
+            
+            $dir = storage_path('app/public/doctors');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+            
+            $destPath = $dir . '/' . $filename;
+            $info = getimagesize($file->getRealPath());
+            
+            if ($info && $info['mime'] == 'image/jpeg') {
+                $img = imagecreatefromjpeg($file->getRealPath());
+                imagejpeg($img, $destPath, 60); // compress quality 60
+                imagedestroy($img);
+            } elseif ($info && $info['mime'] == 'image/png') {
+                $img = imagecreatefrompng($file->getRealPath());
+                imagepng($img, $destPath, 6); // compress level 6
+                imagedestroy($img);
+            } else {
+                $file->storeAs('doctors', $filename, 'public');
+            }
+            
+            $doctor->image = 'doctors/' . $filename;
         }
 
-        return redirect()->route('admin.doctors.index')->with('success', 'Status visibilitas dokter berhasil diperbarui');
+        $doctor->save();
+
+        return redirect()->route('admin.doctors.index')->with('success', 'Data dokter berhasil diperbarui');
     }
 }

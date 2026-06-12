@@ -24,6 +24,21 @@
             </select>
         </div>
 
+        <!-- Photo Upload -->
+        <div class="form-group" style="margin-bottom: 30px;">
+            <label for="image">Foto Dokter (Opsional)</label>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Unggah foto dokter di sini jika ingin menggunakan foto lokal. Sistem akan otomatis mengompresi ukuran gambar (Maksimal 3MB, format JPG/PNG).</p>
+            @if($doctor->photo)
+                <div style="margin-bottom: 10px;">
+                    <img src="{{ $doctor->photo }}" alt="Foto Dokter" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0;">
+                </div>
+            @endif
+            <input type="file" name="image" id="image" class="form-control" accept="image/png, image/jpeg, image/jpg">
+            @error('image')
+                <small style="color: var(--danger); display: block; margin-top: 5px;">{{ $message }}</small>
+            @enderror
+        </div>
+
         <!-- Actions -->
         <div class="flex" style="gap: 12px;">
             <button type="submit" class="btn">
