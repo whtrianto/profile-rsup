@@ -2621,6 +2621,10 @@
                 </select>
             </div>
         </div>
+        
+        <p style="text-align: center; font-size: 0.85rem; color: var(--danger); margin-top: 10px; margin-bottom: 20px; font-style: italic; font-weight: 500;">
+            *Catatan: Jadwal dokter dapat berubah sewaktu-waktu. Mohon hubungi Customer Service untuk konfirmasi.
+        </p>
 
         <div class="slider-wrapper">
             <div class="doctors-grid" id="doctors-grid">
