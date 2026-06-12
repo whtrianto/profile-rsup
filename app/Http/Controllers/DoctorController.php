@@ -49,7 +49,7 @@ class DoctorController extends Controller
                 if ($localDoc && $localDoc->image) {
                     $photoUrl = asset('storage/' . $localDoc->image);
                 } else {
-                    $photoUrl = $row->foto ? 'http://192.168.0.23/storage/' . $row->foto : null;
+                    $photoUrl = null;
                 }
 
                 $doctors_grouped[$pid] = (object)[
