@@ -1678,10 +1678,14 @@
             .hero h1 {
                 font-size: 2.8rem;
                 text-align: center;
+                line-height: 1.25;
             }
 
             .hero p {
+                font-size: 1.05rem;
                 text-align: center;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-actions {
@@ -1689,13 +1693,18 @@
             }
 
             .hero-floating-card-wrapper {
-                align-items: center;
+                flex-direction: row !important;
+                flex-wrap: wrap;
                 justify-content: center;
+                gap: 15px;
+                margin-top: 2rem;
             }
 
             .hero-floating-card {
                 align-self: center !important;
                 margin-right: 0 !important;
+                max-width: 100% !important;
+                flex: 1 1 280px;
             }
 
             .footer-grid {
@@ -1711,6 +1720,22 @@
 
             nav {
                 padding: 1rem 5%;
+            }
+
+            .logo-title {
+                font-size: 0.95rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.65rem;
+            }
+
+            .logo-container img {
+                height: 35px !important;
+            }
+
+            .logo-container img:nth-of-type(2) {
+                height: 48px !important;
             }
 
             .nav-links {
@@ -1753,6 +1778,30 @@
 
             .footer-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .hero-floating-card {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img:first-of-type {
+                display: none; /* Hide Danantara on very small screens to fit text */
+            }
+            .logo-title {
+                font-size: 0.85rem;
+            }
+            .logo-subtitle {
+                font-size: 0.6rem;
             }
         }
 
@@ -2303,15 +2352,9 @@
                     </svg>
                     <span>Partner Kesehatan Pekerja & Keluarga Anda</span>
                 </div>
-                <div style="font-size:0.6rem">
-                    <h1 style="font-size: 1.8rem; line-height: 1.2;">Rumah Sakit <span>Umum Pekerja,</span><br>Melayani
-                        Sepenuh Hati</h1>
-                    <p style="font-size: 0.75rem; margin-top: 10px;">Rumah Sakit Umum Pekerja berkomitmen memberikan
-                        pelayanan kesehatan berkualitas
-                        prima untuk para pekerja dan masyarakat umum dengan fasilitas modern dan tim medis
-                        berpengalaman.
-                    </p>
-
+                <div class="hero-text-container">
+                    <h1>Rumah Sakit <span>Umum Pekerja,</span><br>Melayani Sepenuh Hati</h1>
+                    <p>Rumah Sakit Umum Pekerja berkomitmen memberikan pelayanan kesehatan berkualitas prima untuk para pekerja dan masyarakat umum dengan fasilitas modern dan tim medis berpengalaman.</p>
                 </div>
                 <div class="hero-actions">
                     <a href="#jadwal" class="btn-primary-hero">

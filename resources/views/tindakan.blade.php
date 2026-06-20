@@ -1034,6 +1034,22 @@
                 padding: 1rem 5%;
             }
 
+            .logo-title {
+                font-size: 0.95rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.65rem;
+            }
+
+            .logo-container img {
+                height: 35px !important;
+            }
+
+            .logo-container img:nth-of-type(2) {
+                height: 48px !important;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 70px;
@@ -1071,6 +1087,60 @@
                 height: calc(100vh - 120px);
                 right: 20px;
                 bottom: 90px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* Transform table to card layout on mobile */
+            table.db-table, table.db-table thead, table.db-table tbody, table.db-table th, table.db-table td, table.db-table tr {
+                display: block;
+            }
+            table.db-table thead {
+                display: none;
+            }
+            table.db-table tr.db-row {
+                background: var(--db-card);
+                border-radius: 12px;
+                margin-bottom: 16px;
+                padding: 16px;
+                border: 1px solid var(--db-border);
+                position: relative;
+            }
+            table.db-table td {
+                border: none;
+                padding: 4px 0;
+                display: block;
+                width: 100% !important;
+                text-align: left !important;
+            }
+            table.db-table td:first-child {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: white;
+                margin-bottom: 4px;
+            }
+            table.db-table td.jenis-col {
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+            table.db-table td:last-child {
+                padding-top: 10px;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            table.db-table tr.db-row:hover td {
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img:first-of-type {
+                display: none; /* Hide Danantara on very small screens to fit text */
+            }
+            .logo-title {
+                font-size: 0.85rem;
+            }
+            .logo-subtitle {
+                font-size: 0.6rem;
             }
         }
 
@@ -1631,8 +1701,13 @@
             }
 
             .cart-btn-floating {
-                bottom: 85px;
-                right: 20px;
+                bottom: 90px !important;
+                right: 20px !important;
+            }
+
+            .chatbot-btn {
+                bottom: 20px !important;
+                right: 20px !important;
             }
         }
     </style>

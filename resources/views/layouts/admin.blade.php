@@ -431,10 +431,64 @@
             padding: 30px !important;
             font-style: italic;
         }
+        /* --- Responsive Admin Layout --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column !important;
+            }
+
+            .sidebar {
+                position: fixed !important;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                height: 100vh !important;
+                transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                z-index: 2000 !important;
+            }
+
+            .sidebar.active {
+                left: 0 !important;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.4);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                z-index: 1999;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            #sidebar-toggle {
+                display: block !important;
+            }
+
+            .topbar {
+                padding: 15px 20px !important;
+            }
+
+            .content {
+                padding: 20px !important;
+            }
+
+            .card {
+                padding: 20px !important;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar">
         <div class="sidebar-header">
             <img src="{{ asset('images/logo.png') }}" alt="Logo RSUP" class="logo-img"
@@ -546,7 +600,14 @@
     </div>
     <div class="main-content">
         <div class="topbar">
-            <div class="topbar-left">
+            <div class="topbar-left" style="display: flex; align-items: center; gap: 15px;">
+                <button id="sidebar-toggle" style="background: none; border: none; cursor: pointer; display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;">
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
                 <h2>@yield('title')</h2>
             </div>
             <div class="topbar-right">
@@ -575,6 +636,21 @@
             @yield('content')
         </div>
     </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', toggleSidebar);
+            }
+        });
+    </script>
 </body>
 
 </html>

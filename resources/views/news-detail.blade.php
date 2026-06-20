@@ -325,6 +325,33 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .logo-title {
+                font-size: 0.95rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.65rem;
+            }
+
+            .logo-container img {
+                height: 35px !important;
+            }
+
+            .logo-container img:nth-of-type(2) {
+                height: 48px !important;
+            }
+
+            .btn-back-nav span {
+                display: none;
+            }
+
+            .btn-back-nav {
+                padding: 8px 12px;
+                border-radius: 50%;
+            }
+        }
+
         @media (max-width: 576px) {
             .article-main {
                 padding: 24px;
@@ -336,6 +363,18 @@
 
             .article-img-wrapper {
                 height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img:first-of-type {
+                display: none; /* Hide Danantara on very small screens to fit text */
+            }
+            .logo-title {
+                font-size: 0.85rem;
+            }
+            .logo-subtitle {
+                font-size: 0.6rem;
             }
         }
 
