@@ -144,7 +144,8 @@ class DoctorController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_\.-]/', '_', $file->getClientOriginalName());
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_\.-]/', '_', $originalName) . '.jpg';
             
             // Simpan LANGSUNG ke folder public/storage/doctors agar tidak perlu symlink
             $dir = public_path('storage/doctors');
@@ -154,14 +155,49 @@ class DoctorController extends Controller
             
             $destPath = $dir . '/' . $filename;
             $info = getimagesize($file->getRealPath());
+            $img = null;
             
             if ($info && $info['mime'] == 'image/jpeg') {
                 $img = imagecreatefromjpeg($file->getRealPath());
-                imagejpeg($img, $destPath, 60); // compress quality 60
-                imagedestroy($img);
             } elseif ($info && $info['mime'] == 'image/png') {
                 $img = imagecreatefrompng($file->getRealPath());
-                imagepng($img, $destPath, 6); // compress level 6
+            } elseif ($info && $info['mime'] == 'image/webp') {
+                $img = imagecreatefromwebp($file->getRealPath());
+            }
+
+            if ($img) {
+                // Resize if too large (helps reduce file size significantly)
+                $width = imagesx($img);
+                $height = imagesy($img);
+                $maxDim = 1000;
+                
+                if ($width > $maxDim || $height > $maxDim) {
+                    if ($width > $height) {
+                        $newWidth = $maxDim;
+                        $newHeight = (int)($height * ($maxDim / $width));
+                    } else {
+                        $newHeight = $maxDim;
+                        $newWidth = (int)($width * ($maxDim / $height));
+                    }
+                    $resizedImg = imagecreatetruecolor($newWidth, $newHeight);
+                    
+                    // Fill with white background (to avoid black background from alpha channel)
+                    $white = imagecolorallocate($resizedImg, 255, 255, 255);
+                    imagefill($resizedImg, 0, 0, $white);
+                    
+                    imagecopyresampled($resizedImg, $img, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                    imagedestroy($img);
+                    $img = $resizedImg;
+                }
+
+                // Compress iteratively until the size is under 200KB
+                $quality = 85;
+                do {
+                    imagejpeg($img, $destPath, $quality);
+                    $size = filesize($destPath);
+                    $quality -= 5;
+                } while ($size > 200 * 1024 && $quality >= 20);
+
                 imagedestroy($img);
             } else {
                 $file->move($dir, $filename);
