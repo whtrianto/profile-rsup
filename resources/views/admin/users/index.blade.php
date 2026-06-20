@@ -46,10 +46,18 @@
                         @endif
                     </td>
                     <td style="text-align: center;">
-                        <div style="display: flex; gap: 8px; justify-content: center;">
+                        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning" style="padding: 6px 12px; font-size: 0.8rem;">
                                 Edit
                             </a>
+                            @if($user->google2fa_secret)
+                            <form action="{{ route('admin.users.reset-2fa', $user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin mereset Google Authenticator untuk user ini? Pengguna harus memindai ulang kode QR pada login berikutnya.');" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn" style="padding: 6px 12px; font-size: 0.8rem; background: #f97316; border-color: #f97316; color: white; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);">
+                                    Reset 2FA
+                                </button>
+                            </form>
+                            @endif
                             @if(auth()->id() !== $user->id)
                             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus user ini?');" style="display: inline;">
                                 @csrf

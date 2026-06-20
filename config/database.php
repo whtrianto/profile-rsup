@@ -66,16 +66,19 @@ return [
 
         'estes' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST_ESTES', '192.168.0.10'),
-            'port' => env('DB_PORT_ESTES', '3306'),
-            'database' => env('DB_DATABASE_ESTES', 'estes_care'),
-            'username' => env('DB_USERNAME_ESTES', 'rsup'),
-            'password' => env('DB_PASSWORD_ESTES', 'P@ssw0rd'),
+            'host' => env('DB_HOST_ESTES', env('DB_HOST', '127.0.0.1')),
+            'port' => env('DB_PORT_ESTES', env('DB_PORT', '3306')),
+            'database' => env('DB_DATABASE_ESTES', env('DB_DATABASE', 'laravel')),
+            'username' => env('DB_USERNAME_ESTES', env('DB_USERNAME', 'root')),
+            'password' => env('DB_PASSWORD_ESTES', env('DB_PASSWORD', '')),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            'options' => [
+                \PDO::ATTR_TIMEOUT => (int) env('DB_TIMEOUT_ESTES', 3),
+            ],
         ],
 
         'mariadb' => [

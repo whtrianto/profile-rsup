@@ -154,6 +154,14 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+// 2FA Routes (Requires password auth, but exempt from 2fa middleware to avoid redirect loop)
+Route::middleware(['auth'])->group(function () {
+    Route::get('2fa', [App\Http\Controllers\Auth\TwoFactorController::class, 'index'])->name('2fa.index');
+    Route::post('2fa', [App\Http\Controllers\Auth\TwoFactorController::class, 'verify'])->name('2fa.verify');
+    Route::get('2fa/setup', [App\Http\Controllers\Auth\TwoFactorController::class, 'setup'])->name('2fa.setup');
+    Route::post('2fa/setup', [App\Http\Controllers\Auth\TwoFactorController::class, 'register'])->name('2fa.register');
+});
+
 // Chatbot Route
 Route::post('chatbot', [App\Http\Controllers\ChatBotController::class, 'handle']);
 
@@ -162,24 +170,31 @@ Route::get('tindakan', [App\Http\Controllers\TindakanController::class, 'index']
 Route::get('tindakan/{id}/detail', [App\Http\Controllers\TindakanController::class, 'getDetail'])->name('tindakan.detail');
 
 // Protected Admin Routes
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', '2fa'])->group(function () {
     Route::get('/', function () {
-        $total_doctors_result = \Illuminate\Support\Facades\DB::connection('estes')->select("SELECT
-                    COUNT(DISTINCT pegawai.id) as total
-                FROM
-                    pegawai
-                JOIN
-                    pegawai_bagian ON pegawai_bagian.pegawai_id = pegawai.id
-                JOIN
-                    bagian ON bagian.id = pegawai_bagian.bagian_id
-                JOIN
-                    jadwal_dokter ON jadwal_dokter.pegawai_id = pegawai.id
-                    AND jadwal_dokter.bagian_id = bagian.id
-                WHERE
-                    pegawai.deleted_at IS NULL
-                    AND jadwal_dokter.deleted_at IS NULL
-                    AND bagian.id NOT IN (22,14,66,54,82)");
-        $total_doctors = $total_doctors_result[0]->total ?? 0;
+        try {
+            $total_doctors_result = \Illuminate\Support\Facades\DB::connection('estes')->select("SELECT
+                        COUNT(DISTINCT pegawai.id) as total
+                    FROM
+                        pegawai
+                    JOIN
+                        pegawai_bagian ON pegawai_bagian.pegawai_id = pegawai.id
+                    JOIN
+                        bagian ON bagian.id = pegawai_bagian.bagian_id
+                    JOIN
+                        jadwal_dokter ON jadwal_dokter.pegawai_id = pegawai.id
+                        AND jadwal_dokter.bagian_id = bagian.id
+                    WHERE
+                        pegawai.deleted_at IS NULL
+                        AND jadwal_dokter.deleted_at IS NULL
+                        AND bagian.id NOT IN (22,14,66,54,82)");
+            $total_doctors = $total_doctors_result[0]->total ?? 0;
+        } catch (\Exception $e) {
+            $total_doctors = 0;
+            if (config('app.debug')) {
+                logger()->error('Failed to fetch total doctors from estes: ' . $e->getMessage());
+            }
+        }
         return view('admin.dashboard', compact('total_doctors'));
     })->name('dashboard');
     Route::resource('doctors', DoctorController::class);
@@ -191,5 +206,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Admin Only Routes
     Route::middleware('admin')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
+        Route::post('users/{user}/reset-2fa', [UserController::class, 'reset2fa'])->name('users.reset-2fa');
     });
 });

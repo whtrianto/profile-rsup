@@ -32,6 +32,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
+            // Set 2FA state to false initially
+            session(['2fa_passed' => false]);
+
             return redirect()->intended(route('admin.dashboard'));
         }
 

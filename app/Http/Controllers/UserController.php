@@ -76,4 +76,12 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');
     }
+
+    public function reset2fa(User $user)
+    {
+        $user->google2fa_secret = null;
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'Google Authenticator untuk ' . $user->name . ' berhasil direset.');
+    }
 }
