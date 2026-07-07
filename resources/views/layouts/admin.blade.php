@@ -543,6 +543,17 @@
                 </svg>
                 <span>Kelola Carousel</span>
             </a>
+            <a href="{{ route('admin.popups.index') }}"
+                class="{{ request()->routeIs('admin.popups.*') ? 'active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="14" rx="2" ry="2"></rect>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <circle cx="6" cy="6" r="1" fill="currentColor"></circle>
+                    <circle cx="10" cy="6" r="1" fill="currentColor"></circle>
+                    <circle cx="14" cy="6" r="1" fill="currentColor"></circle>
+                </svg>
+                <span>Kelola Popup</span>
+            </a>
             <a href="{{ route('admin.facilities.index') }}"
                 class="{{ request()->routeIs('admin.facilities.*') ? 'active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

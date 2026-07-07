@@ -22,6 +22,12 @@ trait UploadsImages
             File::makeDirectory($destinationPath, 0755, true, true);
         }
 
+        if (!extension_loaded('gd')) {
+            $originalName = uniqid('file_', true) . '.' . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $originalName);
+            return 'uploads/' . $folder . '/' . $originalName;
+        }
+
         $useWebp = function_exists('imagewebp');
         $filename = uniqid('img_', true) . ($useWebp ? '.webp' : '.jpg');
         $fullPath = $destinationPath . '/' . $filename;

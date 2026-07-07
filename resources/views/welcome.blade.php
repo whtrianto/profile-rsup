@@ -3369,9 +3369,178 @@
                         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                     </svg>
                 </button>
-            </div>
         </div>
     </div>
+
+    @if(isset($popups) && $popups->count() > 0)
+        <!-- Popup Images Overlay -->
+        <div id="image-popup-overlay" class="image-popup-overlay" style="display: none;">
+            <div class="image-popup-wrapper">
+                @foreach($popups as $index => $popup)
+                    <div class="image-popup-item" id="popup-item-{{ $index }}" style="display: none;">
+                        <button class="image-popup-close-btn" onclick="closePopup({{ $index }})" aria-label="Close">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div class="image-popup-content-box">
+                            <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}" class="image-popup-img">
+                            @if($popup->title)
+                                <div class="image-popup-caption">
+                                    {{ $popup->title }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <style>
+            .image-popup-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(8px);
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+            .image-popup-overlay.show {
+                opacity: 1;
+            }
+            .image-popup-wrapper {
+                position: relative;
+                max-width: 90%;
+                max-height: 90%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .image-popup-item {
+                position: relative;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                transform: scale(0.9);
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                max-width: 600px;
+                width: 100%;
+            }
+            .image-popup-overlay.show .image-popup-item.active {
+                transform: scale(1);
+            }
+            .image-popup-close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                width: 36px;
+                height: 36px;
+                background: rgba(15, 23, 42, 0.6);
+                border: none;
+                border-radius: 50%;
+                color: white;
+                cursor: pointer;
+                z-index: 10;
+                transition: background 0.3s, transform 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+            }
+            .image-popup-close-btn:hover {
+                background: rgba(239, 68, 68, 0.9);
+                transform: scale(1.1);
+            }
+            .image-popup-content-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .image-popup-img {
+                max-width: 100%;
+                max-height: 70vh;
+                object-fit: contain;
+                display: block;
+            }
+            .image-popup-caption {
+                padding: 16px 24px;
+                background: white;
+                color: var(--text-dark);
+                font-weight: 700;
+                font-size: 1.1rem;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+                border-top: 1px solid #f1f5f9;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const overlay = document.getElementById('image-popup-overlay');
+                let currentPopupIndex = 0;
+                const totalPopups = {{ $popups->count() }};
+
+                function showPopup(index) {
+                    if (index >= totalPopups) {
+                        // All popups shown, close overlay
+                        overlay.classList.remove('show');
+                        setTimeout(() => {
+                            overlay.style.display = 'none';
+                        }, 400);
+                        return;
+                    }
+
+                    // Hide all popups
+                    for (let i = 0; i < totalPopups; i++) {
+                        const item = document.getElementById('popup-item-' + i);
+                        if (item) {
+                            item.style.display = 'none';
+                            item.classList.remove('active');
+                        }
+                    }
+
+                    // Show the specific popup
+                    const currentItem = document.getElementById('popup-item-' + index);
+                    if (currentItem) {
+                        currentItem.style.display = 'block';
+                        overlay.style.display = 'flex';
+                        // Trigger reflow/macro-task to let CSS transition work
+                        setTimeout(() => {
+                            overlay.classList.add('show');
+                            currentItem.classList.add('active');
+                        }, 50);
+                    }
+                }
+
+                // Initial start
+                showPopup(currentPopupIndex);
+
+                // Exposed close function to handle click actions
+                window.closePopup = function(index) {
+                    const currentItem = document.getElementById('popup-item-' + index);
+                    if (currentItem) {
+                        currentItem.classList.remove('active');
+                    }
+                    
+                    // Small delay before transition to next popup
+                    currentPopupIndex++;
+                    setTimeout(() => {
+                        showPopup(currentPopupIndex);
+                    }, 300);
+                };
+            });
+        </script>
+    @endif
 </body>
 
 </html>

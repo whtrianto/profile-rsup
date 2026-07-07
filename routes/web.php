@@ -9,6 +9,7 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PopupImageController;
 
 Route::get('/linkstorage', function () {
     try {
@@ -140,7 +141,8 @@ Route::get('/', function () {
     $news = App\Models\News::all();
     $slides = App\Models\Slide::where('is_active', true)->orderBy('order', 'asc')->get();
     $facilities = \App\Models\Facility::all();
-    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini', 'facilities'));
+    $popups = App\Models\PopupImage::where('is_active', true)->orderBy('order', 'asc')->get();
+    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini', 'facilities', 'popups'));
 });
 
 Route::get('/berita/{id}', function ($id) {
@@ -202,6 +204,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', '2fa'])->group(funct
     Route::resource('news', NewsController::class);
     Route::resource('slides', SlideController::class);
     Route::resource('facilities', FacilityController::class);
+    Route::resource('popups', PopupImageController::class);
 
     // Admin Only Routes
     Route::middleware('admin')->group(function () {
