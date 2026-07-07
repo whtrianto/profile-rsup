@@ -2884,42 +2884,51 @@
         <div class="section-header">
             <span class="section-tag">FAQ</span>
             <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
-            <p class="section-desc">Temukan jawaban cepat atas pertanyaan umum seputar layanan, fasilitas, pendaftaran, BPJS, dan kunjungan di RSU Pekerja.</p>
+            <p class="section-desc">Temukan jawaban cepat atas pertanyaan umum seputar layanan, fasilitas, pendaftaran,
+                BPJS, dan kunjungan di RSU Pekerja.</p>
         </div>
         <div class="faq-container">
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Bagaimana cara melakukan pendaftaran online di RSU Pekerja?</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer">
-                    <p>Pendaftaran online dapat dilakukan dengan mudah dengan menghubungi layanan WhatsApp Customer Care / Marketing kami di nomor <strong>0857-7778-9022</strong> atau klik tombol "Pendaftaran WA" yang tertera di bagian navigasi menu atas.</p>
+                    <p>Pendaftaran online dapat dilakukan dengan mudah dengan menghubungi layanan WhatsApp Customer Care
+                        / Marketing kami di nomor <strong>0857-7778-9022</strong> atau klik tombol "Pendaftaran WA" yang
+                        tertera di bagian navigasi menu atas.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Apakah RSU Pekerja menerima pasien BPJS Kesehatan?</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer">
-                    <p>Ya, RSU Pekerja melayani pasien BPJS Kesehatan (JKN) untuk pelayanan Rawat Jalan (Poliklinik Spesialis) dengan membawa surat rujukan dari FKTP, serta pelayanan Rawat Inap. Untuk layanan IGD/UGD 24 jam, pasien dalam kondisi darurat medis dapat dilayani langsung tanpa rujukan.</p>
+                    <p>Ya, RSU Pekerja melayani pasien BPJS Kesehatan (JKN) untuk pelayanan Rawat Jalan (Poliklinik
+                        Spesialis) dengan membawa surat rujukan dari FKTP, serta pelayanan Rawat Inap. Untuk layanan
+                        IGD/UGD 24 jam, pasien dalam kondisi darurat medis dapat dilayani langsung tanpa rujukan.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question">
-                    <span>Kapan jam besuk / kunjungan pasien rawat inap?</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <span>Kapan jam besok / kunjungan pasien rawat inap?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer">
-                    <p>Waktu kunjungan pasien rawat inap di RSU Pekerja terbagi dalam dua sesi demi kenyamanan istirahat pasien:
+                    <p>Waktu kunjungan pasien rawat inap di RSU Pekerja terbagi dalam dua sesi demi kenyamanan istirahat
+                        pasien:
                         <br>• <strong>Sesi Siang:</strong> Pukul 11:00 s/d 13:00 WIB
                         <br>• <strong>Sesi Sore/Malam:</strong> Pukul 17:00 s/d 19:00 WIB
                     </p>
@@ -2929,24 +2938,30 @@
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Bagaimana cara mengetahui jadwal praktek dokter spesialis?</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer">
-                    <p>Jadwal praktek dokter spesialis RSU Pekerja diperbarui secara berkala dan dapat Anda lihat langsung di menu <strong>"Jadwal Dokter"</strong> pada halaman utama website ini. Anda juga bisa menanyakan kehadiran dokter spesialis pada hari H melalui call center resmi kami.</p>
+                    <p>Jadwal praktek dokter spesialis RSU Pekerja diperbarui secara berkala dan dapat Anda lihat
+                        langsung di menu <strong>"Jadwal Dokter"</strong> pada halaman utama website ini. Anda juga bisa
+                        menanyakan kehadiran dokter spesialis pada hari H melalui call center resmi kami.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Apakah layanan UGD/IGD dan Ambulans siaga 24 jam?</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div class="faq-answer">
-                    <p>Ya, Unit Gawat Darurat (UGD) dan layanan penjemputan ambulans darurat RSU Pekerja beroperasi <strong>24 jam penuh setiap hari</strong>, termasuk hari Minggu dan hari libur nasional, siap menangani keadaan darurat medis kapan saja.</p>
+                    <p>Ya, Unit Gawat Darurat (UGD) dan layanan penjemputan ambulans darurat RSU Pekerja beroperasi
+                        <strong>24 jam penuh setiap hari</strong>, termasuk hari Minggu dan hari libur nasional, siap
+                        menangani keadaan darurat medis kapan saja.</p>
                 </div>
             </div>
         </div>
@@ -3098,7 +3113,7 @@
 
                 questionBtn.addEventListener('click', function () {
                     const isActive = item.classList.contains('active');
-                    
+
                     // Close all other items
                     faqItems.forEach(otherItem => {
                         otherItem.classList.remove('active');
@@ -3570,10 +3585,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                        <div class="image-popup-caption">
-                                            {{ $popup->title }}
-                                        </div>
-                                    @endif -->
+                                                <div class="image-popup-caption">
+                                                    {{ $popup->title }}
+                                                </div>
+                                            @endif -->
                             </div>
                         </div>
                     @endforeach
