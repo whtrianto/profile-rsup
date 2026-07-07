@@ -2242,6 +2242,83 @@
                 right: 20px;
             }
         }
+
+        /* --- FAQ Section --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0 15px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 22px 28px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            gap: 15px;
+            outline: none;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--secondary);
+        }
+
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: var(--secondary);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s ease;
+            padding: 0 28px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding-bottom: 22px;
+        }
+
+        .faq-answer p {
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -2303,6 +2380,7 @@
             <a href="#jadwal">Jadwal Dokter</a>
             <a href="#berita">Berita</a>
             <a href="{{ route('tindakan.index') }}">Estimasi Tindakan</a>
+            <a href="#faq">FAQ</a>
             <a href="#kontak">Hubungi Kami</a>
             <!-- <a href="{{ route('admin.dashboard') }}" class="btn-admin-nav">Admin Portal</a> -->
             <a href="https://wa.me/6285777789022" target="_blank" class="btn-cta-nav">Pendaftaran WA</a>
@@ -2801,6 +2879,79 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="section-container" id="faq">
+        <div class="section-header">
+            <span class="section-tag">FAQ</span>
+            <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+            <p class="section-desc">Temukan jawaban cepat atas pertanyaan umum seputar layanan, fasilitas, pendaftaran, BPJS, dan kunjungan di RSU Pekerja.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Bagaimana cara melakukan pendaftaran online di RSU Pekerja?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Pendaftaran online dapat dilakukan dengan mudah dengan menghubungi layanan WhatsApp Customer Care / Marketing kami di nomor <strong>0857-7778-9022</strong> atau klik tombol "Pendaftaran WA" yang tertera di bagian navigasi menu atas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Apakah RSU Pekerja menerima pasien BPJS Kesehatan?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Ya, RSU Pekerja melayani pasien BPJS Kesehatan (JKN) untuk pelayanan Rawat Jalan (Poliklinik Spesialis) dengan membawa surat rujukan dari FKTP, serta pelayanan Rawat Inap. Untuk layanan IGD/UGD 24 jam, pasien dalam kondisi darurat medis dapat dilayani langsung tanpa rujukan.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Kapan jam besuk / kunjungan pasien rawat inap?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Waktu kunjungan pasien rawat inap di RSU Pekerja terbagi dalam dua sesi demi kenyamanan istirahat pasien:
+                        <br>• <strong>Sesi Siang:</strong> Pukul 11:00 s/d 13:00 WIB
+                        <br>• <strong>Sesi Sore/Malam:</strong> Pukul 17:00 s/d 19:00 WIB
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Bagaimana cara mengetahui jadwal praktek dokter spesialis?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Jadwal praktek dokter spesialis RSU Pekerja diperbarui secara berkala dan dapat Anda lihat langsung di menu <strong>"Jadwal Dokter"</strong> pada halaman utama website ini. Anda juga bisa menanyakan kehadiran dokter spesialis pada hari H melalui call center resmi kami.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Apakah layanan UGD/IGD dan Ambulans siaga 24 jam?</span>
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Ya, Unit Gawat Darurat (UGD) dan layanan penjemputan ambulans darurat RSU Pekerja beroperasi <strong>24 jam penuh setiap hari</strong>, termasuk hari Minggu dan hari libur nasional, siap menangani keadaan darurat medis kapan saja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Us Section -->
     <section class="section-container" id="kontak">
         <div class="section-header">
@@ -2906,6 +3057,7 @@
                     <li><a href="#promo">Promo & Paket</a></li>
                     <li><a href="#jadwal">Jadwal Dokter</a></li>
                     <li><a href="#berita">Berita & Informasi</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#kontak">Hubungi Kami</a></li>
                 </ul>
             </div>
@@ -2938,6 +3090,29 @@
     <!-- JavaScript code -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const questionBtn = item.querySelector('.faq-question');
+                const answerDiv = item.querySelector('.faq-answer');
+
+                questionBtn.addEventListener('click', function () {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        // Calculate scrollHeight for smooth transition
+                        answerDiv.style.maxHeight = answerDiv.scrollHeight + 'px';
+                    }
+                });
+            });
+
             // Mobile Menu Toggle
             const mobileToggle = document.getElementById('mobile-toggle');
             const navLinks = document.getElementById('nav-links');
