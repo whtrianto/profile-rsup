@@ -19,7 +19,7 @@ class ChatBotController extends Controller
         // Rule-based keyword matching or fallback if no API key
         if (!$apiKey) {
             return response()->json([
-                'reply' => $this->getLocalReply($message) . " <br><br><small style='color: #ef4444;'><em>(Catatan: Chatbot berjalan dalam mode otomatis lokal. Untuk mengaktifkan kecerdasan AI penuh, silakan tambahkan GEMINI_API_KEY di file .env)</em></small>"
+                'reply' => $this->getLocalReply($message)
             ]);
         }
 
@@ -52,25 +52,18 @@ class ChatBotController extends Controller
             }
 
             if ($response->status() === 429 || str_contains($response->body(), 'RESOURCE_EXHAUSTED') || str_contains($response->body(), 'Quota exceeded')) {
-                $debugNotice = config('app.debug') ? " <br><small style='color: #ef4444;'><em>(Debug: Quota Exceeded / Rate Limited. Aktifkan billing di Google AI Studio)</em></small>" : "";
                 return response()->json([
-                    'reply' => $this->getLocalReply($message) . " <br><br><small style='color: #a1a1aa;'>🤖 <em>Pekerja Care (Mode Otomatis)</em></small>" . $debugNotice
+                    'reply' => $this->getLocalReply($message)
                 ]);
             }
 
-            $errorDetail = "";
-            if (config('app.debug')) {
-                $errorDetail = " <br><small style='color: red;'>Debug API Error: Status " . $response->status() . " - " . $response->body() . "</small>";
-            }
-
             return response()->json([
-                'reply' => $this->getLocalReply($message) . " <br><br><small style='color: #a1a1aa;'>🤖 <em>Pekerja Care (Mode Otomatis)</em></small>" . $errorDetail
+                'reply' => $this->getLocalReply($message)
             ]);
 
         } catch (\Exception $e) {
-            $debugMsg = config('app.debug') ? " <br><small style='color: red;'>Debug Error: " . $e->getMessage() . "</small>" : "";
             return response()->json([
-                'reply' => $this->getLocalReply($message) . " <br><br><small style='color: #a1a1aa;'>🤖 <em>Pekerja Care (Mode Otomatis)</em></small>" . $debugMsg
+                'reply' => $this->getLocalReply($message)
             ]);
         }
     }
