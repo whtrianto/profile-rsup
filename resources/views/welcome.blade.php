@@ -1982,7 +1982,7 @@
             padding: 10px 10px;
             font-weight: 700;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             letter-spacing: 0.02em;
             font-size: 0.78rem;
         }
@@ -3721,7 +3721,7 @@
                                             <td class="no-col">1</td>
                                             <td class="indikator-name">Kepatuhan Kebersihan Tangan</td>
                                             <td class="value-cell meet">85,44%</td>
-                                            <td class="value-cell meet">83,50%</td>
+                                            <td class="value-cell below">83,50%</td>
                                             <td class="value-cell meet">85,37%</td>
                                             <td class="value-cell empty">-</td>
                                             <td class="value-cell empty">-</td>
@@ -3791,7 +3791,7 @@
                                             <td class="value-cell below">47,90%</td>
                                             <td class="value-cell below">50,90%</td>
                                             <td class="value-cell below">52%</td>
-                                            <td class="value-cell meet">55,10%</td>
+                                            <td class="value-cell below">55,10%</td>
                                             <td class="target-col">&ge; 80%</td>
                                         </tr>
                                         <tr>
@@ -3823,8 +3823,8 @@
                                             <td class="value-cell meet">100%</td>
                                             <td class="value-cell meet">100%</td>
                                             <td class="value-cell meet">100%</td>
-                                            <td class="value-cell below">91,09%</td>
-                                            <td class="value-cell below">82,54%</td>
+                                            <td class="value-cell meet">91,09%</td>
+                                            <td class="value-cell meet">82,54%</td>
                                             <td class="target-col">&ge; 80%</td>
                                         </tr>
                                         <tr>
@@ -4125,10 +4125,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                                                <div class="image-popup-caption">
-                                                                    {{ $popup->title }}
-                                                                </div>
-                                                            @endif -->
+                                                                                <div class="image-popup-caption">
+                                                                                    {{ $popup->title }}
+                                                                                </div>
+                                                                            @endif -->
                             </div>
                         </div>
                     @endforeach
