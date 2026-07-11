@@ -534,6 +534,12 @@
             align-self: flex-end;
         }
 
+        .hero-floating-card.card-4 {
+            animation: bounceCard1 5.5s infinite alternate ease-in-out 1.5s;
+            align-self: flex-end;
+            margin-right: 18px;
+        }
+
         @keyframes bounceCard1 {
             0% {
                 transform: translateY(0);
@@ -587,6 +593,11 @@
         .hero-floating-card.card-3 .floating-card-icon {
             background: rgba(239, 68, 68, 0.25);
             color: #f87171;
+        }
+
+        .hero-floating-card.card-4 .floating-card-icon {
+            background: rgba(99, 102, 241, 0.25);
+            color: #a5b4fc;
         }
 
         .hero-floating-card .floating-card-text h4 {
@@ -1917,6 +1928,288 @@
             color: var(--danger);
         }
 
+        .info-modal-icon-wrapper.indikatormutu {
+            background: rgba(99, 102, 241, 0.15);
+            color: #6366f1;
+        }
+
+        /* Indikator Mutu Modal - wide layout */
+        .info-modal-content.mutu-wide {
+            max-width: 860px;
+            padding: 36px 40px;
+        }
+
+        .mutu-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 4px;
+        }
+
+        .mutu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 680px;
+        }
+
+        .mutu-table th {
+            background: linear-gradient(135deg, var(--primary) 0%, #065f46 100%);
+            color: white;
+            padding: 10px 10px;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            letter-spacing: 0.02em;
+            font-size: 0.78rem;
+        }
+
+        .mutu-table th.text-left-col {
+            text-align: left;
+        }
+
+        .mutu-table td {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            color: var(--text-dark);
+            vertical-align: middle;
+            text-align: center;
+            font-size: 0.78rem;
+            line-height: 1.4;
+        }
+
+        .mutu-table td.indikator-name {
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .mutu-table td.no-col {
+            font-weight: 700;
+            color: var(--primary);
+            width: 36px;
+        }
+
+        .mutu-table td.target-col {
+            font-weight: 700;
+            color: var(--primary);
+            background: #ecfdf5;
+        }
+
+        .mutu-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .mutu-table tbody tr:hover {
+            background: #f0fdf4;
+        }
+
+        .mutu-table .value-cell {
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+
+        .mutu-table .value-cell.meet {
+            color: #059669;
+            font-weight: 700;
+        }
+
+        .mutu-table .value-cell.below {
+            color: #dc2626;
+        }
+
+        .mutu-table .value-cell.empty {
+            color: #94a3b8;
+        }
+
+        .mutu-header-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .mutu-header-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .mutu-header-text {
+            font-size: 0.82rem;
+            color: #0369a1;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .mutu-modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+        }
+
+        /* =============================================
+           Responsive: Info Modal & Indikator Mutu
+           ============================================= */
+
+        /* Tablet (≤ 900px): shrink wide modal */
+        @media (max-width: 900px) {
+            .info-modal-content.mutu-wide {
+                max-width: 96vw;
+                padding: 28px 20px;
+            }
+        }
+
+        /* Mobile (≤ 768px): centered modal with margin + internal scroll */
+        @media (max-width: 768px) {
+            .info-modal {
+                align-items: center;
+                padding: 16px;
+            }
+
+            .info-modal-content {
+                width: calc(100% - 32px);
+                max-width: 100%;
+                border-radius: 20px;
+                padding: 28px 18px 24px;
+                max-height: 82vh;
+                overflow-y: auto;
+                transform: scale(0.92);
+                margin: auto;
+            }
+
+            .info-modal.active .info-modal-content {
+                transform: scale(1);
+            }
+
+            .info-modal-content.mutu-wide {
+                width: calc(100% - 32px);
+                max-width: 100%;
+                border-radius: 20px;
+                padding: 22px 14px 20px;
+                max-height: 82vh;
+                overflow-y: auto;
+                margin: auto;
+            }
+
+            .info-modal-title {
+                font-size: 1.1rem;
+            }
+
+            .info-modal-icon-wrapper {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .info-modal-icon-wrapper svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .mutu-header-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                padding: 10px 12px;
+            }
+
+            .mutu-header-text {
+                font-size: 0.76rem;
+            }
+
+            .mutu-table {
+                font-size: 0.7rem;
+                min-width: 520px;
+            }
+
+            .mutu-table th {
+                font-size: 0.66rem;
+                padding: 7px 5px;
+            }
+
+            .mutu-table td {
+                font-size: 0.66rem;
+                padding: 6px 5px;
+            }
+        }
+
+        /* Small mobile (≤ 480px) */
+        @media (max-width: 480px) {
+            .info-modal {
+                padding: 12px;
+            }
+
+            .info-modal-content {
+                width: calc(100% - 24px);
+                padding: 22px 14px 20px;
+                border-radius: 18px;
+                max-height: 80vh;
+            }
+
+            .info-modal-content.mutu-wide {
+                width: calc(100% - 24px);
+                padding: 18px 10px 16px;
+                max-height: 80vh;
+            }
+
+            .info-modal-title {
+                font-size: 0.95rem;
+            }
+
+            .info-modal-body {
+                gap: 10px;
+            }
+
+            .info-modal-close {
+                top: 12px;
+                right: 12px;
+                width: 28px;
+                height: 28px;
+                font-size: 1.1rem;
+            }
+
+            .mutu-table {
+                font-size: 0.62rem;
+                min-width: 460px;
+            }
+
+            .mutu-table th {
+                font-size: 0.6rem;
+                padding: 6px 4px;
+            }
+
+            .mutu-table td {
+                font-size: 0.6rem;
+                padding: 5px 4px;
+            }
+
+            .mutu-table td.no-col {
+                width: 22px;
+            }
+
+            .mutu-header-badge {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+            }
+
+            .mutu-modal-body {
+                gap: 10px;
+            }
+        }
+
         .info-modal-icon-wrapper svg {
             width: 32px;
             height: 32px;
@@ -2502,6 +2795,23 @@
                         <p>Layanan Darurat Siaga 24/7</p>
                     </div>
                 </div>
+
+                <!-- Card 4: Indikator Mutu Nasional -->
+                <div class="hero-floating-card card-4">
+                    <div class="floating-card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                            <line x1="2" y1="20" x2="22" y2="20"></line>
+                        </svg>
+                    </div>
+                    <div class="floating-card-text">
+                        <h4>Indikator Mutu Nasional RS</h4>
+                        <p>Capaian Standar Mutu Kemenkes</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2961,7 +3271,8 @@
                 <div class="faq-answer">
                     <p>Ya, Unit Gawat Darurat (UGD) dan layanan penjemputan ambulans darurat RSU Pekerja beroperasi
                         <strong>24 jam penuh setiap hari</strong>, termasuk hari Minggu dan hari libur nasional, siap
-                        menangani keadaan darurat medis kapan saja.</p>
+                        menangani keadaan darurat medis kapan saja.
+                    </p>
                 </div>
             </div>
         </div>
@@ -3344,14 +3655,199 @@
                              <li>Pemeriksaan Laboratorium & Radiologi Cepat 24 Jam</li>
                            </ul>
                            <p style="text-align:center; font-weight:700; color:var(--danger);">Hubungi Emergency UGD: (021) 29484848</p>`
+                },
+                indikatormutu: {
+                    title: "Indikator Mutu Nasional RS",
+                    iconClass: "indikatormutu",
+                    isWide: true,
+                    svg: `<svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>`,
+                    desc: `
+                        <div class="mutu-modal-body">
+                            <div class="mutu-header-banner">
+                                <span class="mutu-header-badge">Periode Jan – Jun 2025</span>
+                                <span class="mutu-header-text">Data capaian indikator mutu nasional rumah sakit sesuai regulasi Kementerian Kesehatan RI.</span>
+                            </div>
+                            <div class="mutu-table-wrapper">
+                                <table class="mutu-table">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="width:36px;">No</th>
+                                            <th rowspan="2" class="text-left-col" style="min-width:190px;">Indikator Nasional Mutu</th>
+                                            <th colspan="6">Capaian</th>
+                                            <th rowspan="2" style="min-width:90px;">Target Pencapaian (Nasional)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Jan</th>
+                                            <th>Feb</th>
+                                            <th>Mar</th>
+                                            <th>Apr</th>
+                                            <th>Mei</th>
+                                            <th>Jun</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="no-col">1</td>
+                                            <td class="indikator-name">Kepatuhan Kebersihan Tangan</td>
+                                            <td class="value-cell meet">85,44%</td>
+                                            <td class="value-cell meet">83,50%</td>
+                                            <td class="value-cell meet">85,37%</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="target-col">&ge; 85%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">2</td>
+                                            <td class="indikator-name">Kepatuhan Penggunaan APD</td>
+                                            <td class="value-cell meet">93,33%</td>
+                                            <td class="value-cell meet">89,78%</td>
+                                            <td class="value-cell meet">96%</td>
+                                            <td class="value-cell meet">92,75%</td>
+                                            <td class="value-cell meet">98,11%</td>
+                                            <td class="value-cell meet">97,46%</td>
+                                            <td class="target-col">100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">3</td>
+                                            <td class="indikator-name">Kepatuhan Identifikasi Pasien</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">99,87%</td>
+                                            <td class="value-cell meet">99,93%</td>
+                                            <td class="target-col">100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">4</td>
+                                            <td class="indikator-name">Waktu Tanggap Operasi Seksio Emergensi</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">5</td>
+                                            <td class="indikator-name">Waktu Tunggu Rawat Jalan</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">6</td>
+                                            <td class="indikator-name">Penundaan Operasi Elektif</td>
+                                            <td class="value-cell meet">0,60%</td>
+                                            <td class="value-cell meet">0,34%</td>
+                                            <td class="value-cell meet">0,79%</td>
+                                            <td class="value-cell meet">0,28%</td>
+                                            <td class="value-cell meet">0,68%</td>
+                                            <td class="value-cell meet">0%</td>
+                                            <td class="target-col">&le; 5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">7</td>
+                                            <td class="indikator-name">Kepatuhan Waktu Visite Dokter</td>
+                                            <td class="value-cell below">49%</td>
+                                            <td class="value-cell below">48,20%</td>
+                                            <td class="value-cell below">47,90%</td>
+                                            <td class="value-cell below">50,90%</td>
+                                            <td class="value-cell below">52%</td>
+                                            <td class="value-cell meet">55,10%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">8</td>
+                                            <td class="indikator-name">Kepuasan Pasien</td>
+                                            <td class="value-cell meet">88,16</td>
+                                            <td class="value-cell meet">88,85</td>
+                                            <td class="value-cell meet">87,61</td>
+                                            <td class="value-cell meet">88</td>
+                                            <td class="value-cell meet">89</td>
+                                            <td class="value-cell meet">89</td>
+                                            <td class="target-col">&ge; 76,61</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">9</td>
+                                            <td class="indikator-name">Pelaporan Hasil Kritis Laboratorium</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="target-col">100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">10</td>
+                                            <td class="indikator-name">Kepatuhan Penggunaan Formularium Nasional</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell below">91,09%</td>
+                                            <td class="value-cell below">82,54%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">11</td>
+                                            <td class="indikator-name">Kepatuhan Terhadap Alur Klinis (Clinical Pathway)</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="value-cell empty">-</td>
+                                            <td class="value-cell meet">84%</td>
+                                            <td class="value-cell meet">85,11%</td>
+                                            <td class="value-cell meet">81,25%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">12</td>
+                                            <td class="indikator-name">Kepatuhan Upaya Pencegahan Risiko Jatuh</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="target-col">100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-col">13</td>
+                                            <td class="indikator-name">Kecepatan Waktu Tanggap Komplain</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="value-cell meet">100%</td>
+                                            <td class="target-col">&ge; 80%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p style="font-size:0.72rem; color:#94a3b8; text-align:center; margin-top:4px;">
+                                <span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px;"><span style="width:10px;height:10px;border-radius:50%;background:#059669;display:inline-block;"></span> Memenuhi Target</span>
+                                <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#dc2626;display:inline-block;"></span> Di Bawah Target</span>
+                            </p>
+                        </div>`
                 }
             };
 
             const floatingCards = {
                 'card-1': 'bpjs',
                 'card-2': 'akreditasi',
-                'card-3': 'ugd'
+                'card-3': 'ugd',
+                'card-4': 'indikatormutu'
             };
+
+            const infoModalContentEl = document.querySelector('.info-modal-content');
 
             Object.keys(floatingCards).forEach(className => {
                 const cardEl = document.querySelector(`.hero-floating-card.${className}`);
@@ -3364,6 +3860,13 @@
                             infoModalDesc.innerHTML = data.desc;
                             infoModalIcon.className = `info-modal-icon-wrapper ${data.iconClass}`;
                             infoModalIcon.innerHTML = data.svg;
+
+                            // Apply wide class for indikatormutu modal
+                            if (data.isWide) {
+                                infoModalContentEl.classList.add('mutu-wide');
+                            } else {
+                                infoModalContentEl.classList.remove('mutu-wide');
+                            }
 
                             // Open Modal
                             infoModal.style.display = 'flex';
@@ -3585,10 +4088,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                                <div class="image-popup-caption">
-                                                    {{ $popup->title }}
-                                                </div>
-                                            @endif -->
+                                                                <div class="image-popup-caption">
+                                                                    {{ $popup->title }}
+                                                                </div>
+                                                            @endif -->
                             </div>
                         </div>
                     @endforeach
