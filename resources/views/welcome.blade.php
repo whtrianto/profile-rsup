@@ -1859,21 +1859,32 @@
             border-radius: 24px;
             width: 90%;
             max-width: 550px;
-            padding: 40px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
             z-index: 2001;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
         }
 
         .info-modal.active .info-modal-content {
             transform: scale(1);
         }
 
+        /* Topbar: always visible, never scrolls */
+        .info-modal-topbar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 16px 20px 0;
+            flex-shrink: 0;
+        }
+
         .info-modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: relative;
+            top: auto;
+            right: auto;
             background: rgba(15, 23, 42, 0.05);
             border: none;
             width: 36px;
@@ -1887,11 +1898,20 @@
             cursor: pointer;
             color: var(--text-dark);
             transition: var(--transition);
+            flex-shrink: 0;
         }
 
         .info-modal-close:hover {
             background: var(--danger);
             color: white;
+        }
+
+        /* Scrollable body area */
+        .info-modal-scroll-area {
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 16px 40px 40px;
+            flex: 1;
         }
 
         .info-modal-body {
@@ -1900,6 +1920,10 @@
             align-items: center;
             text-align: center;
             gap: 20px;
+        }
+
+        .info-modal-desc {
+            width: 100%;
         }
 
         .info-modal-icon-wrapper {
@@ -1933,10 +1957,10 @@
             color: #6366f1;
         }
 
-        /* Indikator Mutu Modal - wide layout */
+        /* Indikator Mutu Modal - wide layout (desktop) */
         .info-modal-content.mutu-wide {
             max-width: 860px;
-            padding: 36px 40px;
+            max-height: 90vh;
         }
 
         .mutu-table-wrapper {
@@ -2068,11 +2092,10 @@
         @media (max-width: 900px) {
             .info-modal-content.mutu-wide {
                 max-width: 96vw;
-                padding: 28px 20px;
             }
         }
 
-        /* Mobile (≤ 768px): centered modal with margin + internal scroll */
+        /* Mobile (≤ 768px): centered with margin, scrollable body */
         @media (max-width: 768px) {
             .info-modal {
                 align-items: center;
@@ -2082,11 +2105,17 @@
             .info-modal-content {
                 width: calc(100% - 32px);
                 max-width: 100%;
-                border-radius: 20px;
-                padding: 28px 18px 24px;
                 max-height: 82vh;
-                overflow-y: auto;
+                border-radius: 20px;
                 transform: scale(0.92);
+                margin: auto;
+            }
+
+            .info-modal-content.mutu-wide {
+                width: calc(100% - 32px);
+                max-width: 100%;
+                max-height: 82vh;
+                border-radius: 20px;
                 margin: auto;
             }
 
@@ -2094,14 +2123,12 @@
                 transform: scale(1);
             }
 
-            .info-modal-content.mutu-wide {
-                width: calc(100% - 32px);
-                max-width: 100%;
-                border-radius: 20px;
-                padding: 22px 14px 20px;
-                max-height: 82vh;
-                overflow-y: auto;
-                margin: auto;
+            .info-modal-topbar {
+                padding: 14px 16px 0;
+            }
+
+            .info-modal-scroll-area {
+                padding: 12px 16px 24px;
             }
 
             .info-modal-title {
@@ -2149,20 +2176,32 @@
         /* Small mobile (≤ 480px) */
         @media (max-width: 480px) {
             .info-modal {
-                padding: 12px;
+                padding: 10px;
             }
 
             .info-modal-content {
-                width: calc(100% - 24px);
-                padding: 22px 14px 20px;
-                border-radius: 18px;
+                width: calc(100% - 20px);
                 max-height: 80vh;
+                border-radius: 18px;
             }
 
             .info-modal-content.mutu-wide {
-                width: calc(100% - 24px);
-                padding: 18px 10px 16px;
+                width: calc(100% - 20px);
                 max-height: 80vh;
+            }
+
+            .info-modal-topbar {
+                padding: 12px 14px 0;
+            }
+
+            .info-modal-scroll-area {
+                padding: 8px 12px 20px;
+            }
+
+            .info-modal-close {
+                width: 28px;
+                height: 28px;
+                font-size: 1.1rem;
             }
 
             .info-modal-title {
@@ -2171,14 +2210,6 @@
 
             .info-modal-body {
                 gap: 10px;
-            }
-
-            .info-modal-close {
-                top: 12px;
-                right: 12px;
-                width: 28px;
-                height: 28px;
-                font-size: 1.1rem;
             }
 
             .mutu-table {
@@ -4002,11 +4033,17 @@
     <div id="info-modal" class="info-modal">
         <div class="info-modal-backdrop" onclick="closeInfoModal()"></div>
         <div class="info-modal-content">
-            <button class="info-modal-close" onclick="closeInfoModal()">&times;</button>
-            <div class="info-modal-body">
-                <div class="info-modal-icon-wrapper" id="info-modal-icon"></div>
-                <h3 class="info-modal-title" id="info-modal-title">Title</h3>
-                <div class="info-modal-desc" id="info-modal-desc">Description</div>
+            <!-- Close button — always pinned at top, never scrolls -->
+            <div class="info-modal-topbar">
+                <button class="info-modal-close" onclick="closeInfoModal()">&times;</button>
+            </div>
+            <!-- Scrollable content area -->
+            <div class="info-modal-scroll-area">
+                <div class="info-modal-body">
+                    <div class="info-modal-icon-wrapper" id="info-modal-icon"></div>
+                    <h3 class="info-modal-title" id="info-modal-title">Title</h3>
+                    <div class="info-modal-desc" id="info-modal-desc">Description</div>
+                </div>
             </div>
         </div>
     </div>
