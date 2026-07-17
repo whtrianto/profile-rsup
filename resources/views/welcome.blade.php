@@ -2703,7 +2703,7 @@
             <a href="#promo">Promo</a>
             <a href="#jadwal">Jadwal Dokter</a>
             <a href="#berita">Berita</a>
-            <a href="{{ route('tindakan.index') }}">Estimasi Tindakan</a>
+            <!-- <a href="{{ route('tindakan.index') }}">Estimasi Tindakan</a> -->
             <a href="#faq">FAQ</a>
             <a href="#kontak">Hubungi Kami</a>
             <!-- <a href="{{ route('admin.dashboard') }}" class="btn-admin-nav">Admin Portal</a> -->
@@ -4125,10 +4125,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                                                                <div class="image-popup-caption">
-                                                                                    {{ $popup->title }}
-                                                                                </div>
-                                                                            @endif -->
+                                                                                        <div class="image-popup-caption">
+                                                                                            {{ $popup->title }}
+                                                                                        </div>
+                                                                                    @endif -->
                             </div>
                         </div>
                     @endforeach
