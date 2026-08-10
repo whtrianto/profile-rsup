@@ -2703,6 +2703,7 @@
             <a href="#promo">Promo</a>
             <a href="#jadwal">Jadwal Dokter</a>
             <a href="#berita">Berita</a>
+            <a href="#instagram-feed">Galeri</a>
             <!-- <a href="{{ route('tindakan.index') }}">Estimasi Tindakan</a> -->
             <a href="#faq">FAQ</a>
             <a href="#kontak">Hubungi Kami</a>
@@ -3225,7 +3226,7 @@
         <section class="section-container" id="instagram-feed" style="padding-top: 0;"><br><br>
             <div class="section-header mb-5">
                 <!-- <span class="section-tag"
-                                style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white;">Instagram</span> -->
+                                        style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white;">Instagram</span> -->
                 <h2 class="section-title">Galeri Edukasi & Kegiatan</h2>
                 <p class="section-desc">Ikuti akun resmi Instagram kami untuk mendapatkan info terbaru, tips kesehatan
                     harian, serta dokumentasi kegiatan RSUP langsung dari gadget Anda.</p>
@@ -4206,10 +4207,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                                                                                                        <div class="image-popup-caption">
-                                                                                                                            {{ $popup->title }}
-                                                                                                                        </div>
-                                                                                                                    @endif -->
+                                                                                                                                        <div class="image-popup-caption">
+                                                                                                                                            {{ $popup->title }}
+                                                                                                                                        </div>
+                                                                                                                                    @endif -->
                             </div>
                         </div>
                     @endforeach
