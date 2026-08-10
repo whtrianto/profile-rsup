@@ -142,7 +142,55 @@ Route::get('/', function () {
     $slides = App\Models\Slide::where('is_active', true)->orderBy('order', 'asc')->get();
     $facilities = \App\Models\Facility::all();
     $popups = App\Models\PopupImage::where('is_active', true)->orderBy('order', 'asc')->get();
-    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini', 'facilities', 'popups'));
+
+    // Fetch Instagram posts using basic display API with cache
+    $instagramFeed = \Illuminate\Support\Facades\Cache::remember('instagram_feed', 3600, function () {
+        $accessToken = config('services.instagram.access_token');
+        if (!$accessToken) {
+            return [];
+        }
+
+        try {
+            // 1. Refresh Instagram Token (Meta Long Lived Tokens can be refreshed to extend their 60-day lifetime)
+            // We refresh the token in the background so it never expires.
+            $refreshUrl = "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=" . $accessToken;
+            $refreshResponse = \Illuminate\Support\Facades\Http::withoutVerifying()->get($refreshUrl);
+            if ($refreshResponse->successful()) {
+                $newAccessToken = $refreshResponse->json()['access_token'] ?? null;
+                if ($newAccessToken && $newAccessToken !== $accessToken) {
+                    // Update token in .env file dynamically if it changed
+                    $envPath = base_path('.env');
+                    if (file_exists($envPath)) {
+                        $envContent = file_get_contents($envPath);
+                        $envContent = preg_replace(
+                            '/^INSTAGRAM_ACCESS_TOKEN=.*/m',
+                            'INSTAGRAM_ACCESS_TOKEN=' . $newAccessToken,
+                            $envContent
+                        );
+                        file_put_contents($envPath, $envContent);
+                        config(['services.instagram.access_token' => $newAccessToken]);
+                        $accessToken = $newAccessToken;
+                    }
+                }
+            }
+
+            // 2. Fetch Media
+            $mediaUrl = "https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=" . $accessToken;
+            $mediaResponse = \Illuminate\Support\Facades\Http::withoutVerifying()->get($mediaUrl);
+            if ($mediaResponse->successful()) {
+                $data = $mediaResponse->json()['data'] ?? [];
+                // Filter only image and carousel_album (or video but fallback to thumbnail)
+                return array_slice($data, 0, 6); // Ambil 6 postingan terbaru saja
+            }
+        } catch (\Exception $e) {
+            if (config('app.debug')) {
+                logger()->error('Failed to fetch Instagram feed: ' . $e->getMessage());
+            }
+        }
+        return [];
+    });
+
+    return view('welcome', compact('doctors', 'promos', 'news', 'slides', 'nama_hari_ini', 'facilities', 'popups', 'instagramFeed'));
 });
 
 Route::get('/berita/{id}', function ($id) {

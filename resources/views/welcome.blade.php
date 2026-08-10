@@ -3220,8 +3220,89 @@
         </div>
     </section>
 
+    <!-- Instagram Feed Section -->
+    @if(isset($instagramFeed) && count($instagramFeed) > 0)
+        <section class="section-container" id="instagram-feed" style="padding-top: 0;"><br><br>
+            <div class="section-header mb-5">
+                <!-- <span class="section-tag"
+                                style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white;">Instagram</span> -->
+                <h2 class="section-title">Galeri Edukasi & Kegiatan</h2>
+                <p class="section-desc">Ikuti akun resmi Instagram kami untuk mendapatkan info terbaru, tips kesehatan
+                    harian, serta dokumentasi kegiatan RSUP langsung dari gadget Anda.</p>
+            </div>
+            <div class="slider-wrapper">
+                <div class="news-grid" id="instagram-slider"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    @foreach($instagramFeed as $post)
+                        <div class="news-card"
+                            style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                            <div class="news-img-wrapper" style="position: relative; padding-top: 100%; overflow: hidden;">
+                                <img src="{{ $post['media_type'] === 'VIDEO' ? ($post['thumbnail_url'] ?? $post['media_url']) : $post['media_url'] }}"
+                                    alt="{{ Str::limit($post['caption'] ?? 'Instagram Post', 50) }}" class="news-img"
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+
+                                @if($post['media_type'] === 'VIDEO')
+                                    <div
+                                        style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: white; stroke: none;">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                    </div>
+                                @elseif($post['media_type'] === 'CAROUSEL_ALBUM')
+                                    <div
+                                        style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); border-radius: 4px; padding: 2px 6px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white;">
+                                        <svg viewBox="0 0 24 24"
+                                            style="width: 12px; height: 12px; stroke: currentColor; fill: none; margin-right: 4px;"
+                                            stroke-width="2">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                                        </svg>
+                                        <span>Slide</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="news-body"
+                                style="display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                                <div>
+                                    <div class="news-meta">
+                                        <span class="news-badge"
+                                            style="background: #f0fdf4; color: var(--secondary);">Post</span>
+                                        <div class="news-date">
+                                            <svg viewBox="0 0 24 24">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                            </svg>
+                                            <span>{{ \Carbon\Carbon::parse($post['timestamp'] ?? now())->format('d M Y') }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="news-text"
+                                        style="font-size: 0.9rem; line-height: 1.5; color: var(--text-dark); margin-bottom: 15px;">
+                                        {{ Str::limit($post['caption'] ?? '', 100) }}
+                                    </p>
+                                </div>
+                                <a href="{{ $post['permalink'] }}" target="_blank" class="news-link"
+                                    style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <span>Lihat di Instagram</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     <!-- FAQ Section -->
-    <section class="section-container" id="faq">
+    <section class="section-container" id="faq"
+        style="background-color: rgba(241, 245, 249, 0.85); border-radius: 40px; border: 1px solid rgba(226, 232, 240, 0.8);">
         <div class="section-header">
             <span class="section-tag">FAQ</span>
             <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
@@ -4125,10 +4206,10 @@
                                 <img src="{{ asset($popup->image) }}" alt="{{ $popup->title ?? 'Popup' }}"
                                     class="image-popup-img">
                                 <!-- @if($popup->title)
-                                                                                        <div class="image-popup-caption">
-                                                                                            {{ $popup->title }}
-                                                                                        </div>
-                                                                                    @endif -->
+                                                                                                                        <div class="image-popup-caption">
+                                                                                                                            {{ $popup->title }}
+                                                                                                                        </div>
+                                                                                                                    @endif -->
                             </div>
                         </div>
                     @endforeach
