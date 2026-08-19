@@ -1091,13 +1091,21 @@
         }
 
         @media (max-width: 600px) {
+
             /* Transform table to card layout on mobile */
-            table.db-table, table.db-table thead, table.db-table tbody, table.db-table th, table.db-table td, table.db-table tr {
+            table.db-table,
+            table.db-table thead,
+            table.db-table tbody,
+            table.db-table th,
+            table.db-table td,
+            table.db-table tr {
                 display: block;
             }
+
             table.db-table thead {
                 display: none;
             }
+
             table.db-table tr.db-row {
                 background: var(--db-card);
                 border-radius: 12px;
@@ -1106,6 +1114,7 @@
                 border: 1px solid var(--db-border);
                 position: relative;
             }
+
             table.db-table td {
                 border: none;
                 padding: 4px 0;
@@ -1113,20 +1122,24 @@
                 width: 100% !important;
                 text-align: left !important;
             }
+
             table.db-table td:first-child {
                 font-size: 1.1rem;
                 font-weight: 700;
                 color: white;
                 margin-bottom: 4px;
             }
+
             table.db-table td.jenis-col {
                 font-size: 0.85rem;
                 margin-bottom: 12px;
             }
+
             table.db-table td:last-child {
                 padding-top: 10px;
                 border-top: 1px solid rgba(255, 255, 255, 0.05);
             }
+
             table.db-table tr.db-row:hover td {
                 transform: none !important;
             }
@@ -1134,11 +1147,14 @@
 
         @media (max-width: 480px) {
             .logo-container img:first-of-type {
-                display: none; /* Hide Danantara on very small screens to fit text */
+                display: none;
+                /* Hide Danantara on very small screens to fit text */
             }
+
             .logo-title {
                 font-size: 0.85rem;
             }
+
             .logo-subtitle {
                 font-size: 0.6rem;
             }
@@ -1766,7 +1782,7 @@
             <a href="{{ url('/') }}#promo">Promo</a>
             <a href="{{ url('/') }}#jadwal">Jadwal Dokter</a>
             <a href="{{ url('/') }}#berita">Berita</a>
-            <a href="#" class="active">Estimasi Tindakan</a>
+            <!-- <a href="#" class="active">Estimasi Tindakan</a> -->
             <a href="{{ url('/') }}#kontak">Hubungi Kami</a>
             <a href="https://wa.me/6285777789022" target="_blank" class="btn-cta-nav">Pendaftaran WA</a>
         </div>
