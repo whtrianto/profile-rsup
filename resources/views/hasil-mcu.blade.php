@@ -1114,7 +1114,7 @@
                                     <td><span class="badge-mr">{{ $row->no_mr }}</span></td>
                                     <td><span class="badge-paket">{{ $row->nama_paket }}</span></td>
                                     <td style="text-align:center;">
-                                        <a href="{{ route('hasil-mcu.pdf', $row->id) }}" target="_blank" class="btn-print-pdf"
+                                        <a href="{{ route('hasil-mcu.pdf', encrypt($row->id)) }}" target="_blank" class="btn-print-pdf"
                                             title="Cetak PDF Resume MCU">
                                             <svg viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round"

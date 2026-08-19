@@ -73,6 +73,12 @@ class HasilMCUController extends Controller
     public function generatePDF(Request $request, $registrasi_id)
     {
         try {
+            $registrasi_id = decrypt($registrasi_id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404, 'Data MCU tidak valid atau tidak ditemukan.');
+        }
+
+        try {
             $response = Http::withoutVerifying()->timeout(120)->get($this->getApiUrl('/mcu/pdf/' . $registrasi_id));
 
             if ($response->successful()) {

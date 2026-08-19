@@ -478,7 +478,7 @@
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     @foreach($visits as $visit)
-                        <a href="{{ route('hasil-mcu.pdf', $visit->id) }}" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; text-decoration: none; color: var(--text-dark); transition: var(--transition); background: white;">
+                        <a href="{{ route('hasil-mcu.pdf', encrypt($visit->id)) }}" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; text-decoration: none; color: var(--text-dark); transition: var(--transition); background: white;">
                             <div style="display: flex; align-items: center; gap: 12px;">
                                 <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center;">
                                     <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2;">
