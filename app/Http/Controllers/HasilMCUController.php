@@ -26,7 +26,7 @@ class HasilMCUController extends Controller
         $nasabah_ids   = array_filter((array) $request->input('nasabah_ids', []));
 
         try {
-            $response = Http::post($this->getApiUrl('/mcu/index'), [
+            $response = Http::withoutVerifying()->post($this->getApiUrl('/mcu/index'), [
                 'tanggal_awal'  => $tanggal_awal,
                 'tanggal_akhir' => $tanggal_akhir,
                 'nasabah_ids'   => $nasabah_ids,
@@ -73,7 +73,7 @@ class HasilMCUController extends Controller
     public function generatePDF(Request $request, $registrasi_id)
     {
         try {
-            $response = Http::timeout(120)->get($this->getApiUrl('/mcu/pdf/' . $registrasi_id));
+            $response = Http::withoutVerifying()->timeout(120)->get($this->getApiUrl('/mcu/pdf/' . $registrasi_id));
 
             if ($response->successful()) {
                 $contentType = $response->header('Content-Type');
@@ -119,7 +119,7 @@ class HasilMCUController extends Controller
             $no_mr         = trim($request->input('no_mr'));
 
             try {
-                $response = Http::post($this->getApiUrl('/mcu/search'), [
+                $response = Http::withoutVerifying()->post($this->getApiUrl('/mcu/search'), [
                     'tanggal_lahir' => $tanggal_lahir,
                     'no_mr'         => $no_mr,
                 ]);
