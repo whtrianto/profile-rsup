@@ -220,7 +220,9 @@ Route::get('tindakan', [App\Http\Controllers\TindakanController::class, 'index']
 Route::get('tindakan/{id}/detail', [App\Http\Controllers\TindakanController::class, 'getDetail'])->name('tindakan.detail');
 
 // Hasil MCU Routes
-Route::match(['get', 'post'], '/hasil-mcu', [App\Http\Controllers\HasilMCUController::class, 'index'])->name('hasil-mcu.index');
+Route::middleware(['auth'])->group(function () {
+    Route::match(['get', 'post'], '/hasil-mcu', [App\Http\Controllers\HasilMCUController::class, 'index'])->name('hasil-mcu.index');
+});
 Route::get('/hasil-mcu/{registrasi_id}/pdf', [App\Http\Controllers\HasilMCUController::class, 'generatePDF'])->name('hasil-mcu.pdf');
 Route::match(['get', 'post'], '/pasien-mcu', [App\Http\Controllers\HasilMCUController::class, 'pasienMCU'])->name('pasien-mcu');
 
