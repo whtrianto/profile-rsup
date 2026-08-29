@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\RateLimiter;
 
 class HasilMCUController extends Controller
 {
@@ -116,10 +117,20 @@ class HasilMCUController extends Controller
     public function pasienMCU(Request $request)
     {
         if ($request->isMethod('post')) {
+            $key = 'pasien_mcu_' . $request->ip();
+
+            if (RateLimiter::tooManyAttempts($key, 5)) {
+                $seconds = RateLimiter::availableIn($key);
+                $minutes = ceil($seconds / 60);
+                return back()->withInput()->with('error', "Anda telah mencoba 5 kali. Silakan tunggu {$minutes} menit untuk mencoba lagi.");
+            }
+
             $request->validate([
                 'tanggal_lahir' => 'required|date',
                 'no_mr'         => 'required|string',
             ]);
+
+            RateLimiter::hit($key, 300); // 300 detik = 5 menit
 
             $tanggal_lahir = $request->input('tanggal_lahir');
             $no_mr         = trim($request->input('no_mr'));
