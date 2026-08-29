@@ -117,7 +117,8 @@ class HasilMCUController extends Controller
     public function pasienMCU(Request $request)
     {
         if ($request->isMethod('post')) {
-            $key = 'pasien_mcu_' . $request->ip();
+            // Kombinasi IP dan User Agent (agar device yang berbeda di jaringan yang sama memiliki limit masing-masing)
+            $key = 'pasien_mcu_' . md5($request->ip() . $request->userAgent());
 
             if (RateLimiter::tooManyAttempts($key, 5)) {
                 $seconds = RateLimiter::availableIn($key);
