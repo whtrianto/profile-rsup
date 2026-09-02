@@ -73,6 +73,17 @@ class HasilMCUController extends Controller
      */
     public function generatePDF(Request $request, $registrasi_id)
     {
+        if (!auth()->check()) {
+            if ($request->isMethod('get')) {
+                abort(403, 'Akses PDF harus melalui validasi form.');
+            }
+            
+            $request->validate([
+                'captcha' => 'required|captcha'
+            ], [
+                'captcha.captcha' => 'Jawaban Captcha tidak valid.'
+            ]);
+        }
         try {
             $registrasi_id = decrypt($registrasi_id);
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {

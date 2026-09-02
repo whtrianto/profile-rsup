@@ -478,7 +478,7 @@
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     @foreach($visits as $visit)
-                        <a href="{{ route('hasil-mcu.pdf', encrypt($visit->id)) }}" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; text-decoration: none; color: var(--text-dark); transition: var(--transition); background: white;">
+                        <button type="button" onclick="openCaptchaModal('{{ route('hasil-mcu.pdf', encrypt($visit->id)) }}')" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; text-decoration: none; color: var(--text-dark); transition: var(--transition); background: white; cursor: pointer; width: 100%; text-align: left;">
                             <div style="display: flex; align-items: center; gap: 12px;">
                                 <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center;">
                                     <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2;">
@@ -493,8 +493,49 @@
                             <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: var(--secondary); stroke-width: 2;">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
-                        </a>
+                        </button>
                     @endforeach
+                </div>
+
+                <!-- Modal Captcha -->
+                <div id="captchaModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                        <h3 style="margin-bottom: 10px; color: var(--primary); font-size: 1.2rem;">Verifikasi Keamanan</h3>
+                        <p style="margin-bottom: 20px; font-size: 0.85rem; color: var(--text-muted);">Selesaikan soal matematika di bawah ini untuk mengunduh PDF.</p>
+                        
+                        <form id="captchaForm" method="POST" action="" target="_blank" onsubmit="setTimeout(closeCaptchaModal, 500)">
+                            @csrf
+                            <div style="margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                                <div style="background: var(--bg-light); padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <img src="{{ captcha_src('math') }}" alt="captcha" id="captchaImage" style="border-radius: 5px; cursor: pointer;" onclick="refreshCaptcha()" title="Klik untuk memuat ulang captcha">
+                                </div>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Klik gambar untuk memuat ulang</span>
+                            </div>
+                            
+                            <input type="text" name="captcha" required class="form-input" placeholder="Masukkan jawaban" style="margin-bottom: 20px; text-align: center; font-weight: bold; font-size: 1.1rem; letter-spacing: 2px;" autocomplete="off">
+                            
+                            <div style="display: flex; gap: 10px;">
+                                <button type="button" onclick="closeCaptchaModal()" class="btn-submit" style="background: #f1f5f9; color: #475569; flex: 1;">Batal</button>
+                                <button type="submit" class="btn-submit" style="flex: 1;">Unduh</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    function openCaptchaModal(actionUrl) {
+                        document.getElementById('captchaForm').action = actionUrl;
+                        document.getElementById('captchaModal').style.display = 'flex';
+                        refreshCaptcha();
+                    }
+                    function closeCaptchaModal() {
+                        document.getElementById('captchaModal').style.display = 'none';
+                        document.querySelector('input[name="captcha"]').value = '';
+                    }
+                    function refreshCaptcha() {
+                        document.getElementById('captchaImage').src = '{{ captcha_src('math') }}' + Math.random();
+                    }
+                </script>
                 </div>
                 <div style="margin-top: 20px; text-align: center;">
                     <a href="{{ url('pasien-mcu') }}" style="font-size: 0.9rem; color: var(--secondary); font-weight: 600; text-decoration: none;">&larr; Kembali ke Pencarian</a>
