@@ -492,7 +492,8 @@
                                     </div>
                                     <div>
                                         <div style="font-weight: 700; font-size: 1rem;">Tanggal:
-                                            {{ \Carbon\Carbon::parse($visit->tanggal_masuk)->translatedFormat('d F Y') }}</div>
+                                            {{ \Carbon\Carbon::parse($visit->tanggal_masuk)->translatedFormat('d F Y') }}
+                                        </div>
                                         <div style="font-size: 0.8rem; color: var(--text-muted);">Kunjungan MCU</div>
                                     </div>
                                 </div>
@@ -503,6 +504,7 @@
                             </button>
                         @endforeach
                     </div>
+                    <br>
                     <p style="margin-bottom: 20px; font-size: 0.9rem; color: #dc2626;">
                         Catatan : Jika mengalami 500 | Server Error, silahkan tunggu 1 menit dan ulangi kembali
                     </p>
