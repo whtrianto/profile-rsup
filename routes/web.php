@@ -224,6 +224,7 @@ Route::middleware(['auth'])->group(function () {
     Route::match(['get', 'post'], '/hasil-mcu', [App\Http\Controllers\HasilMCUController::class, 'index'])->name('hasil-mcu.index');
 });
 Route::match(['get', 'post'], '/hasil-mcu/{registrasi_id}/pdf', [App\Http\Controllers\HasilMCUController::class, 'generatePDF'])->name('hasil-mcu.pdf');
+Route::post('/hasil-mcu/validate-captcha', [App\Http\Controllers\HasilMCUController::class, 'validateCaptcha'])->name('hasil-mcu.validate-captcha');
 Route::match(['get', 'post'], '/pasien-mcu', [App\Http\Controllers\HasilMCUController::class, 'pasienMCU'])->name('pasien-mcu');
 
 // Protected Admin Routes

@@ -68,21 +68,31 @@ class HasilMCUController extends Controller
         return view('hasil-mcu', compact('results', 'connectionError', 'nasabahList'));
     }
 
+    public function validateCaptcha(Request $request)
+    {
+        $request->validate([
+            'captcha' => 'required|captcha'
+        ], [
+            'captcha.captcha' => 'Jawaban Captcha tidak valid.'
+        ]);
+
+        session(['captcha_passed' => true]);
+        
+        return response()->json(['success' => true]);
+    }
+
     /**
      * Generate & download PDF Resume MCU for a single registrasi.
      */
     public function generatePDF(Request $request, $registrasi_id)
     {
         if (!auth()->check()) {
-            if ($request->isMethod('get')) {
-                abort(403, 'Akses PDF harus melalui validasi form.');
+            if (!session('captcha_passed')) {
+                abort(403, 'Silakan validasi Captcha terlebih dahulu.');
             }
             
-            $request->validate([
-                'captcha' => 'required|captcha'
-            ], [
-                'captcha.captcha' => 'Jawaban Captcha tidak valid.'
-            ]);
+            // Hapus session setelah berhasil lewat agar user harus mengisi captcha lagi untuk PDF berikutnya
+            session()->forget('captcha_passed');
         }
         try {
             $registrasi_id = decrypt($registrasi_id);

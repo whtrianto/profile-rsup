@@ -501,10 +501,11 @@
                 <div id="captchaModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
                     <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
                         <h3 style="margin-bottom: 10px; color: var(--primary); font-size: 1.2rem;">Verifikasi Keamanan</h3>
-                        <p style="margin-bottom: 20px; font-size: 0.85rem; color: var(--text-muted);">Selesaikan soal matematika di bawah ini untuk mengunduh PDF.</p>
+                        <p style="margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted);">Selesaikan soal matematika di bawah ini untuk mengunduh PDF.</p>
                         
-                        <form id="captchaForm" method="POST" action="" target="_blank" onsubmit="setTimeout(closeCaptchaModal, 500)">
-                            @csrf
+                        <div id="captchaError" style="display: none; margin-bottom: 15px; color: #dc2626; font-size: 0.85rem; background: rgba(239, 68, 68, 0.1); padding: 8px; border-radius: 6px;"></div>
+
+                        <form id="captchaForm" onsubmit="submitCaptcha(event)">
                             <div style="margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
                                 <div style="background: var(--bg-light); padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
                                     <img src="{{ captcha_src('math') }}" alt="captcha" id="captchaImage" style="border-radius: 5px; cursor: pointer;" onclick="refreshCaptcha()" title="Klik untuk memuat ulang captcha">
@@ -512,28 +513,78 @@
                                 <span style="font-size: 0.75rem; color: var(--text-muted);">Klik gambar untuk memuat ulang</span>
                             </div>
                             
-                            <input type="text" name="captcha" required class="form-input" placeholder="Masukkan jawaban" style="margin-bottom: 20px; text-align: center; font-weight: bold; font-size: 1.1rem; letter-spacing: 2px;" autocomplete="off">
+                            <input type="text" id="captchaInput" name="captcha" required class="form-input" placeholder="Masukkan jawaban" style="margin-bottom: 20px; text-align: center; font-weight: bold; font-size: 1.1rem; letter-spacing: 2px;" autocomplete="off">
                             
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" onclick="closeCaptchaModal()" class="btn-submit" style="background: #f1f5f9; color: #475569; flex: 1;">Batal</button>
-                                <button type="submit" class="btn-submit" style="flex: 1;">Unduh</button>
+                                <button type="submit" id="btnSubmitCaptcha" class="btn-submit" style="flex: 1;">Unduh</button>
                             </div>
                         </form>
                     </div>
                 </div>
 
                 <script>
+                    let currentActionUrl = '';
+
                     function openCaptchaModal(actionUrl) {
-                        document.getElementById('captchaForm').action = actionUrl;
+                        currentActionUrl = actionUrl;
+                        document.getElementById('captchaError').style.display = 'none';
+                        document.getElementById('captchaInput').value = '';
                         document.getElementById('captchaModal').style.display = 'flex';
                         refreshCaptcha();
                     }
+
                     function closeCaptchaModal() {
                         document.getElementById('captchaModal').style.display = 'none';
-                        document.querySelector('input[name="captcha"]').value = '';
+                        document.getElementById('captchaInput').value = '';
                     }
+
                     function refreshCaptcha() {
                         document.getElementById('captchaImage').src = '{{ captcha_src('math') }}' + Math.random();
+                    }
+
+                    async function submitCaptcha(e) {
+                        e.preventDefault();
+                        const btn = document.getElementById('btnSubmitCaptcha');
+                        const errorDiv = document.getElementById('captchaError');
+                        const captchaVal = document.getElementById('captchaInput').value;
+
+                        btn.disabled = true;
+                        btn.innerHTML = 'Memproses...';
+                        errorDiv.style.display = 'none';
+
+                        try {
+                            const response = await fetch('{{ route('hasil-mcu.validate-captcha') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({ captcha: captchaVal })
+                            });
+
+                            const data = await response.json();
+
+                            if (response.ok && data.success) {
+                                // Captcha valid! Open PDF and close modal
+                                window.open(currentActionUrl, '_blank');
+                                closeCaptchaModal();
+                            } else {
+                                // Invalid Captcha
+                                errorDiv.innerHTML = data.message || data.errors?.captcha?.[0] || 'Jawaban Captcha tidak valid.';
+                                errorDiv.style.display = 'block';
+                                refreshCaptcha();
+                                document.getElementById('captchaInput').value = '';
+                                document.getElementById('captchaInput').focus();
+                            }
+                        } catch (err) {
+                            errorDiv.innerHTML = 'Terjadi kesalahan, silakan coba lagi.';
+                            errorDiv.style.display = 'block';
+                        } finally {
+                            btn.disabled = false;
+                            btn.innerHTML = 'Unduh';
+                        }
                     }
                 </script>
                 </div>
