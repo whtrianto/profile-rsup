@@ -105,12 +105,15 @@ class HasilMCUController extends Controller
                     abort(500, 'Format response API tidak valid.');
                 }
             } else {
+                if ($response->status() == 500) {
+                    abort(500, 'Anda sudah melakukan generate MCU tadi, tunggu 1 menit lagi untuk generate ulang');
+                }
                 $json = $response->json();
                 $msg = $json['message'] ?? 'Gagal mengambil PDF dari API Backend. Status: ' . $response->status();
                 abort($response->status() == 404 ? 404 : 500, $msg);
             }
         } catch (\Exception $e) {
-            abort(500, 'Gagal menghubungi server API Backend: ' . $e->getMessage());
+            abort(500, 'Anda sudah melakukan generate MCU tadi, tunggu 1 menit lagi untuk generate ulang');
         }
     }
 
