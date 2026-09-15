@@ -180,7 +180,7 @@ Route::get('/', function () {
             if ($mediaResponse->successful()) {
                 $data = $mediaResponse->json()['data'] ?? [];
                 // Filter only image and carousel_album (or video but fallback to thumbnail)
-                return array_slice($data, 0, 6); // Ambil 6 postingan terbaru saja
+                return array_slice($data, 0, 8); // Ambil 8 postingan terbaru saja
             }
         } catch (\Exception $e) {
             if (config('app.debug')) {
