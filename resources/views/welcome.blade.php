@@ -2707,6 +2707,7 @@
             <!-- <a href="{{ route('tindakan.index') }}">Estimasi Tindakan</a> -->
             <a href="#faq">FAQ</a>
             <a href="#kontak">Hubungi Kami</a>
+            <a href="{{ route('karir.index') }}">Karir</a>
             <a href="{{ url('/pasien-mcu') }}">Hasil MCU</a>
             <!-- <a href="{{ route('admin.dashboard') }}" class="btn-admin-nav">Admin Portal</a> -->
             <a href="https://wa.me/6285777789022" target="_blank" class="btn-cta-nav">Pendaftaran WA</a>

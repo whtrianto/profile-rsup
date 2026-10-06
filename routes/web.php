@@ -10,6 +10,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PopupImageController;
+use App\Http\Controllers\KarirController;
 
 Route::get('/linkstorage', function () {
     try {
@@ -228,6 +229,8 @@ Route::post('/hasil-mcu/validate-captcha', [App\Http\Controllers\HasilMCUControl
 Route::match(['get', 'post'], '/pasien-mcu', [App\Http\Controllers\HasilMCUController::class, 'pasienMCU'])->name('pasien-mcu');
 
 // Protected Admin Routes
+Route::get('/karir', [KarirController::class, 'indexFrontend'])->name('karir.index');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', '2fa'])->group(function () {
     Route::get('/', function () {
         try {
@@ -261,6 +264,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', '2fa'])->group(funct
     Route::resource('slides', SlideController::class);
     Route::resource('facilities', FacilityController::class);
     Route::resource('popups', PopupImageController::class);
+    Route::resource('karirs', KarirController::class);
 
     // Admin Only Routes
     Route::middleware('admin')->group(function () {

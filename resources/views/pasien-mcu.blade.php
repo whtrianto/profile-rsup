@@ -381,6 +381,57 @@
             text-decoration: none;
         }
 
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-toggle svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px 5%;
+                gap: 20px;
+                align-items: stretch;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+                transition: var(--transition);
+                z-index: 999;
+                backdrop-filter: none;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .logo-container img:first-of-type {
+                display: none;
+            }
+
+            .logo-title { font-size: 0.95rem; }
+            .logo-subtitle { font-size: 0.65rem; }
+        }
+
         @media (max-width: 700px) {
             .top-bar {
                 display: none;
@@ -431,13 +482,23 @@
                 <span class="logo-subtitle">KBN - RSUP</span>
             </div>
         </a>
-        <div class="nav-links">
+        
+        <button class="mobile-toggle" id="mobile-toggle">
+            <svg viewBox="0 0 24 24">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="nav-links" id="nav-links">
             <a href="{{ url('/') }}#home">Home</a>
             <a href="{{ url('/') }}#layanan">Layanan</a>
             <a href="{{ url('/') }}#jadwal">Jadwal Dokter</a>
             <a href="{{ url('/') }}#berita">Berita</a>
             <!-- <a href="{{ url('tindakan') }}">Estimasi Tindakan</a> -->
             <a href="{{ url('pasien-mcu') }}" class="active">Hasil MCU Pasien</a>
+            <a href="{{ route('karir.index') }}">Karir</a>
             <a href="{{ url('/') }}#kontak">Hubungi Kami</a>
         </div>
     </nav>
@@ -669,6 +730,28 @@
         <p>&copy; {{ date('Y') }} RSU Pekerja KBN. Seluruh hak cipta dilindungi. &mdash; <a
                 href="{{ url('/') }}">Kembali ke Beranda</a></p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navLinks = document.getElementById('nav-links');
+
+            if(mobileToggle && navLinks) {
+                mobileToggle.addEventListener('click', function () {
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close mobile menu when a link is clicked
+                const navItems = navLinks.querySelectorAll('a');
+                navItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1783,6 +1783,7 @@
             <a href="{{ url('/') }}#jadwal">Jadwal Dokter</a>
             <a href="{{ url('/') }}#berita">Berita</a>
             <!-- <a href="#" class="active">Estimasi Tindakan</a> -->
+            <a href="{{ route('karir.index') }}">Karir</a>
             <a href="{{ url('/') }}#kontak">Hubungi Kami</a>
             <a href="https://wa.me/6285777789022" target="_blank" class="btn-cta-nav">Pendaftaran WA</a>
         </div>
