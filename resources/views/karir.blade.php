@@ -102,6 +102,35 @@
             .modal-info { width: 55%; padding: 40px; }
         }
 
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9);
+            z-index: 3000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox-overlay.active { display: flex; opacity: 1; }
+        .lightbox-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .lightbox-img {
+            max-width: 95%; max-height: 95vh; object-fit: contain;
+            transform: scale(1); transition: transform 0.2s ease; cursor: grab;
+        }
+        .lightbox-img:active { cursor: grabbing; transition: none; }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2); color: white; border: none;
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.3s ease; z-index: 3010;
+        }
+        .lightbox-close:hover { background: #ef4444; }
+        .lightbox-controls {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 3010;
+            background: rgba(0, 0, 0, 0.6); padding: 10px 20px; border-radius: 30px; backdrop-filter: blur(5px);
+        }
+        .lightbox-btn {
+            background: rgba(255, 255, 255, 0.2); color: white; border: none; width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease;
+        }
+        .lightbox-btn:hover { background: rgba(255, 255, 255, 0.4); }
+
         /* --- Responsive --- */
         @media (max-width: 992px) {
             .container { padding: 0 3%; }
@@ -223,7 +252,7 @@
             </button>
             <div class="modal-body">
                 <div class="modal-img-wrapper">
-                    <img src="" alt="Pamflet Karir" id="modalImg" class="modal-img">
+                    <img src="" alt="Pamflet Karir" id="modalImg" class="modal-img" style="cursor: zoom-in;" onclick="openLightbox(this.src)" title="Klik untuk memperbesar">
                 </div>
                 <div class="modal-info">
                     <h2 class="modal-title" id="modalTitle"></h2>
@@ -234,6 +263,24 @@
                     <div class="modal-desc" id="modalDesc"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="imageLightbox">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="lightbox-content" id="lightboxContent">
+            <img src="" alt="Full Image" id="lightboxImg" class="lightbox-img">
+        </div>
+        <div class="lightbox-controls">
+            <button class="lightbox-btn" onclick="zoomOut(event)" title="Perkecil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <button class="lightbox-btn" onclick="zoomIn(event)" title="Perbesar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
         </div>
     </div>
 
@@ -277,6 +324,89 @@
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
+
+        // Lightbox Functionality
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        let currentZoom = 1;
+
+        function openLightbox(src) {
+            if(!src) return;
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+        }
+
+        function closeLightbox(e) {
+            if(e) {
+                if(e.target.id === 'lightboxImg') return; // Jangan tutup jika klik gambar
+                e.preventDefault();
+            }
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                currentZoom = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+            }, 300);
+        }
+
+        function zoomIn(e) {
+            if(e) e.stopPropagation();
+            if (currentZoom < 4) {
+                currentZoom += 0.5;
+                updateTransform();
+            }
+        }
+
+        function zoomOut(e) {
+            if(e) e.stopPropagation();
+            if (currentZoom > 1) {
+                currentZoom -= 0.5;
+            } else {
+                currentZoom = 1;
+                translateX = 0;
+                translateY = 0;
+            }
+            updateTransform();
+        }
+
+        function updateTransform() {
+            lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX / currentZoom}px, ${translateY / currentZoom}px)`;
+        }
+
+        // Drag functionality
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
+
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (currentZoom > 1) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+            }
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging && currentZoom > 1) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+        
+        // Tutup lightbox jika klik background
+        document.getElementById('lightboxContent').addEventListener('click', function(e) {
+            if(e.target === this) closeLightbox();
+        });
     </script>
 </body>
 </html>
