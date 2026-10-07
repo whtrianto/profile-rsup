@@ -75,25 +75,32 @@
         }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-content {
-            background: white; border-radius: 24px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+            background: white; border-radius: 24px; width: 100%; max-width: 950px; max-height: 90vh;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(20px); transition: transform 0.3s ease;
-            position: relative;
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
         }
         .modal-overlay.active .modal-content { transform: translateY(0); }
         .modal-close {
-            position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); color: white; border: none;
+            position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.6); color: white; border: none;
             width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: background 0.3s ease; z-index: 10;
         }
-        .modal-close:hover { background: var(--danger); }
-        .modal-body { display: flex; flex-direction: column; }
-        .modal-img-wrapper { width: 100%; max-height: 400px; background: #e2e8f0; }
-        .modal-img { width: 100%; height: 100%; object-fit: contain; max-height: 400px; }
+        .modal-close:hover { background: #ef4444; }
+        .modal-body { display: flex; flex-direction: column; flex: 1; overflow-y: auto; }
+        .modal-img-wrapper { width: 100%; background: #f8fafc; display: flex; justify-content: center; align-items: center; padding: 30px; border-bottom: 1px solid #f1f5f9; }
+        .modal-img { width: 100%; max-width: 350px; height: auto; max-height: 50vh; object-fit: contain; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
         .modal-info { padding: 30px; }
         .modal-title { font-size: 1.75rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
         .modal-date { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9; }
         .modal-desc { font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; }
         .karir-card { cursor: pointer; }
+
+        @media (min-width: 768px) {
+            .modal-body { flex-direction: row; }
+            .modal-img-wrapper { width: 45%; border-bottom: none; border-right: 1px solid #f1f5f9; padding: 40px; }
+            .modal-img { max-width: 100%; max-height: 70vh; }
+            .modal-info { width: 55%; padding: 40px; }
+        }
 
         /* --- Responsive --- */
         @media (max-width: 992px) {
