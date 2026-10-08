@@ -12,31 +12,25 @@ class DoctorController extends Controller
 
     private function getEstesDoctors()
     {
-        $jadwal_dokter = \Illuminate\Support\Facades\DB::select("SELECT
-                    pegawai.id AS pegawai_id,
-                    pegawai.nama AS nama_dokter,
-                    pegawai.foto,
-                    jadwal_dokter.waktu_mulai,
-                    jadwal_dokter.waktu_selesai,
-                    jadwal_dokter.nama_hari,
-                    jadwal_dokter.no_hari,
-                    bagian.nama AS nama_bagian,
-                    bagian.id AS bagian_id
-                FROM
-                    pegawai
-                JOIN
-                    pegawai_bagian ON pegawai_bagian.pegawai_id = pegawai.id
-                JOIN
-                    bagian ON bagian.id = pegawai_bagian.bagian_id
-                JOIN
-                    jadwal_dokter ON jadwal_dokter.pegawai_id = pegawai.id
-                    AND jadwal_dokter.bagian_id = bagian.id
-                WHERE
-                    pegawai.deleted_at IS NULL
-                    AND jadwal_dokter.deleted_at IS NULL
-                    AND bagian.id NOT IN (22,14,66,54,82)
-                ORDER BY
-                    pegawai.nama ASC");
+        $apiUrl = env('MCU_API_URL', 'https://api.rsumumpekerja-kbn.com/api') . '/doctors-schedule';
+        try {
+            $response = \Illuminate\Support\Facades\Http::withoutVerifying()->get($apiUrl);
+            $jadwal_dokter = [];
+            
+            if ($response->successful() && $response->json('success')) {
+                $data = $response->json('data');
+                // Sort by doctor name to match the ORDER BY pegawai.nama ASC in the previous query
+                $jadwal_dokter = collect($data)->sortBy('nama_dokter')->map(function ($item) {
+                    return (object) $item;
+                })->values()->toArray();
+            }
+        } catch (\Exception $e) {
+            $jadwal_dokter = [];
+            if (config('app.debug')) {
+                logger()->error('Failed to fetch doctor schedules from API: ' . $e->getMessage());
+            }
+        }
+
 
         $localDoctors = \App\Models\Doctor::all()->keyBy('id_dokter');
 
